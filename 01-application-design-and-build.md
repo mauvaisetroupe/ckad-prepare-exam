@@ -1,4 +1,4 @@
-## Define, build and modify container images
+# Define, build and modify container images
 
 ## List docker images
 ```
@@ -6,7 +6,7 @@ $ docker image ls
 $ docker images ## equivalent
 ```
 
-### Build container image from Dockerfile
+## Build container image from Dockerfile
 
 Example of Dockerfile:
 
@@ -33,12 +33,11 @@ Run an instance of the image my-image-name and publish port 8080 on the containe
 $ docker run -p 9090:8080 my-image-name
 ```
 
+## Push image to repository
+TODO
 
-### Push imaage to repository
+# Understand Jobs and CronJobs
 
+# Understand multi-container Pod design patterns (e.g. sidecar, init and others)
 
-## Understand Jobs and CronJobs
-
-## Understand multi-container Pod design patterns (e.g. sidecar, init and others)
-
-## Utilize persistent and ephemeral volumes
+# Utilize persistent and ephemeral volumes
