@@ -1,16 +1,22 @@
 ## Define, build and modify container images
 
+## List docker images
+```
+$ docker image ls
+$ docker images ## equivalent
+```
+
 ### Build container image from Dockerfile
 
-Example of Dockefile:
+Example of Dockerfile:
 
 ```dockerfile
-FROM python:3.8-alpine
-COPY ./requirements.txt /app/requirements.txt
-WORKDIR /app
-RUN pip install -r requirements.txt
-COPY . /app
-ENTRYPOINT [ "python" ]
+FROM python:3.6
+RUN pip install flask
+COPY . /opt/
+EXPOSE 8080
+WORKDIR /opt
+ENTRYPOINT ["python", "app.py"]
 ```
 
 In the **folder** where Dockerfile is located, run the following command
@@ -18,6 +24,13 @@ In the **folder** where Dockerfile is located, run the following command
 ```
 $ docker build -t my-image-name .
 $ docker build -t my-image-name:v1 .
+```
+
+## Run a instance of the image
+
+Run an instance of the image my-image-name and publish port 8080 on the container to 9090 on the host.
+```
+$ docker run -p 9090:8080 my-image-name
 ```
 
 
