@@ -1,4 +1,4 @@
-## [Application Design and Build - 20%] (./01-application-design-and-build.md)
+## [Application Design and Build - 20%](./01-application-design-and-build.md)
 - Define, build and modify container images
 - Understand Jobs and CronJobs
 - Understand multi-container Pod design patterns (e.g. sidecar, init and others)
