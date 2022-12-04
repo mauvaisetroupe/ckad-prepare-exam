@@ -4,40 +4,40 @@
 [//]: # (source 07/Practice Test Role Based Access Controls)
 
 ### Method 1 
-```bash
-$ ps aux | grep apiserver
-root        8994  1.6  1.9 1044792 316884 ?      Ssl  déc.03  14:15 kube-apiserver --advertise-address=192.168.49.2 --allow-privileged=true --authorization-mode=Node,RBAC
-```
+<pre>
+$ <b>ps aux | grep apiserver</b>
+root        8994  1.6  1.9 1044792 316884 ?      Ssl  déc.03  14:15 kube-apiserver 
+--advertise-address=192.168.49.2 --allow-privileged=true <b>--authorization-mode=Node,RBAC</b>
+</pre>
 
 ### Method 2
-```
-$ kubectl get pods -A
-$ kubectl get pods -n kube-system  kube-apiserver-minikube -o yaml
+<pre>
+$ <b>kubectl get pods -A</b>
+$ <b>kubectl get pods -n kube-system  kube-apiserver-minikube -o yaml</b>
 ...
   - command:
     - kube-apiserver
     - --advertise-address=192.168.49.2
     - --allow-privileged=true
-    - --authorization-mode=Node,RBAC
-```
+    - <b>--authorization-mode=Node,RBAC</b>
+</pre>
 
 ## Find resources a role give access
 [//]: # (source 07/Practice Test Role Based Access Controls)
-```
-$ kubectl get roles -A
-$ kubectl describe role -n kubernetes-dashboard kubernetes-dashboard
+<pre>
+$ <b>kubectl get roles -A</b>
+$ <b>kubectl describe role -n kubernetes-dashboard kubernetes-dashboard</b>
 Name:         kubernetes-dashboard
 PolicyRule:
   Resources       Non-Resource URLs  Resource Names                     Verbs
   ---------       -----------------  --------------                     -----
   secrets         []                 [kubernetes-dashboard-certs]       [get update delete]
-
-```
+</pre>
 
 ## Find accounts binded to a role
 [//]: # (source 07/Practice Test Role Based Access Controls)
-```
-$ kubectl get rolebindings -A
+<pre>
+$ <b>kubectl get rolebindings -A</b>
 NAMESPACE              NAME                                                ROLE                                                  AGE
 kubernetes-dashboard   kubernetes-dashboard                                Role/kubernetes-dashboard                             15h
 
@@ -50,13 +50,12 @@ Subjects:
   Kind            Name                  Namespace
   ----            ----                  ---------
   ServiceAccount  kubernetes-dashboard  kubernetes-dashboard
-
-```
+</pre>
 
 ## Inspect permission granted to a user
 [//]: # (source 07/Practice Test Role Based Access Controls)
 <pre>
-<b>$ kubectl config view</b>
+$ <b>kubectl config view</b>
 apiVersion: v1
 kind: Config
 clusters:
@@ -79,12 +78,13 @@ users:
 
 ## check if a user get list pods
 [//]: # (source 07/Practice Test Role Based Access Controls)
-```
-$ kubectl get pods --as user1
+<pre>
+$ <b>kubectl get pods --as user1</b>
 Error from server (Forbidden): pods is forbidden: User "user1" cannot list resource "pods" in API group "" in the namespace "default"
-```
+</pre>
 
 ## create a role with access to create, get and list pods
 [//]: # (source 07/Practice Test Role Based Access Controls)
-
-$ kubectl create role developer-role --verb=create,get,list --resource=pods
+<pre>
+$ <b>kubectl create role developer-role --verb=create,get,list --resource=pods</b>
+</pre>
