@@ -42,7 +42,7 @@
  - Practice test Docker Images - DONE
  - Practice Test KubeConfig - DONE
  - Practice Test Role Based Access Controls - DONE
- - Practice Test Cluster Roles
+ - Practice Test Cluster Roles - DONE
  - Labs – Admission Controllers
  - Labs – Validating and Mutating Admission Controllers
  - Lab – API Versions/Deprecations

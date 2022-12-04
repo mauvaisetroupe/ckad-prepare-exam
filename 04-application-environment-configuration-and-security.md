@@ -221,3 +221,52 @@ rules:
   - create
   - watch
 </pre>
+
+## create clusterRole and clusterRoleBinding
+[//]: # (source 07/Practice Test Cluster Roles)
+
+Find resources that are cluster scoped (vs. namespace scoped)
+
+<pre>
+$ <b>kubectl api-resources --namespaced=false</b>
+</pre>
+
+<pre>
+$ <b>$ kubectl create clusterrole storage-admin --resource=persistentvolumes,storageclasses --verb=* -o yaml</b>
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: storage-admin
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumes
+  verbs:
+  - '*'
+- apiGroups:
+  - storage.k8s.io
+  resources:
+  - storageclasses
+  verbs:
+  - '*'
+</pre>
+
+<pre>
+$ <b>kubectl create clusterrolebinding storage-admin-binding --clusterrole=storage-admin --user=michelle -o yaml</b>
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: null
+  name: storage-admin-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: storage-admin
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: michelle
+</pre>
+
