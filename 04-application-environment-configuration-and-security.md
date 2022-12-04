@@ -27,6 +27,9 @@ eyJhbGciOiJSUzI1NiIsImtpZCI6ImxlenRpQ3JGNVQ0Qjg2YnlNS1FVUGpsS0t3cDdXd3NiUHhlTzkz
 [//]: # (source 02/Service Account)
 
 ### Methode 1
+
+edit value in yaml @ spec > template > spec > serviceAccountName
+
 <pre>
 $ <b>kubectl edit deployments web-dashboard</b>
 apiVersion: apps/v1
@@ -145,10 +148,66 @@ Error from server (Forbidden): pods is forbidden: User "user1" cannot list resou
 $ <b>kubectl get pods --as=system:serviceaccount:default:my-service-account</b>
 </pre>
 
-## Add a resource or resourceName to an existing Role
+## Add authorization to create Deployment to existing Role
 [//]: # (source 07/Practice Test Role Based Access Controls)
 
 <pre>
 $ <b>kubectl edit role developer-role</b>
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: "2022-12-04T16:12:42Z"
+  name: developer-role
+  namespace: default
+  resourceVersion: "42405"
+  uid: 36c8f0dd-02b2-4d40-b272-35ade876ae2e
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - list
+  - get
+  - create
+  - watch
 </pre>
 
+> **Warning**
+> 
+> Need to edit apiGroups. 
+> Use command kubectl api-resources
+> 
+> $ kubectl api-resources 
+> NAME           SHORTNAMES   APIVERSION   NAMESPACED   KIND
+> deployments    deploy       apps/v1      true         Deployment
+
+<pre>
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: "2022-12-04T16:12:42Z"
+  name: developer-role
+  namespace: default
+  resourceVersion: "42405"
+  uid: 36c8f0dd-02b2-4d40-b272-35ade876ae2e
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - list
+  - get
+  - create
+  - watch
+- <b>apiGroups:
+  - "apps"</b>
+  resources:
+  - deployments
+  verbs:
+  - list
+  - get
+  - create
+  - watch
+</pre>
