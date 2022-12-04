@@ -38,11 +38,11 @@ PolicyRule:
 [//]: # (source 07/Practice Test Role Based Access Controls)
 <pre>
 $ <b>kubectl get rolebindings -A</b>
-NAMESPACE              NAME                                                ROLE                                                  AGE
-kubernetes-dashboard   kubernetes-dashboard                                Role/kubernetes-dashboard                             15h
+NAMESPACE              NAME                           ROLE                             AGE
+kubernetes-dashboard   kubernetes-dashboard           Role/kubernetes-dashboard        15h
 
 
-$ kubectl describe -n kubernetes-dashboard rolebindings kubernetes-dashboard 
+$ <b>kubectl describe -n kubernetes-dashboard rolebindings kubernetes-dashboard</b>
 Name:         kubernetes-dashboard
 Role:
   Name:  kubernetes-dashboard
