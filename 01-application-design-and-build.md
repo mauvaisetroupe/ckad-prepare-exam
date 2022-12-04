@@ -1,12 +1,13 @@
 # Define, build and modify container images
 
-## List docker images
+## Docker Image
+### List docker images
 ```
 $ docker image ls
 $ docker images ## equivalent
 ```
 
-## Build container image from Dockerfile
+### Build container image from Dockerfile
 
 Example of Dockerfile:
 
@@ -26,14 +27,14 @@ $ docker build -t my-image-name .
 $ docker build -t my-image-name:v1 .
 ```
 
-## Run a instance of the image
+### Run a instance of the image
 
 Run an instance of the image my-image-name and publish port 8080 on the container to 9090 on the host.
 ```
 $ docker run -p 9090:8080 my-image-name
 ```
 
-## Push image to repository
+### Push image to repository
 TODO
 
 # Understand Jobs and CronJobs
