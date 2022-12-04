@@ -55,8 +55,8 @@ Subjects:
 
 ## Inspect permission granted to a user
 [//]: # (source 07/Practice Test Role Based Access Controls)
-```
-$ kubectl config view
+<pre>
+<b>$ kubectl config view</b>
 apiVersion: v1
 kind: Config
 clusters:
@@ -75,7 +75,7 @@ users:
   user:
     client-certificate: /home/lionel/.minikube/profiles/minikube/client.crt
     client-key: /home/lionel/.minikube/profiles/minikube/client.key
-```
+</pre>
 
 ## check if a user get list pods
 [//]: # (source 07/Practice Test Role Based Access Controls)
@@ -84,3 +84,7 @@ $ kubectl get pods --as user1
 Error from server (Forbidden): pods is forbidden: User "user1" cannot list resource "pods" in API group "" in the namespace "default"
 ```
 
+## create a role with access to create, get and list pods
+[//]: # (source 07/Practice Test Role Based Access Controls)
+
+$ kubectl create role developer-role --verb=create,get,list --resource=pods
