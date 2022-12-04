@@ -100,8 +100,12 @@ Subjects:
   ServiceAccount  kubernetes-dashboard  kubernetes-dashboard
 </pre>
 
-## Inspect permission granted to a user
+## Inspect permission granted to a user, and change context
 [//]: # (source 07/Practice Test Role Based Access Controls)
+[//]: # (source 07/Practice Test KubeConfig)
+
+Default file is in ~/.kube/config
+
 <pre>
 $ <b>kubectl config view</b>
 apiVersion: v1
@@ -122,6 +126,10 @@ users:
   user:
     client-certificate: /home/lionel/.minikube/profiles/minikube/client.crt
     client-key: /home/lionel/.minikube/profiles/minikube/client.key
+</pre>
+
+<pre>
+$ <b>kubectl config use-context minikube</b>
 </pre>
 
 ## create a role with access to create, get and list pods, bind the role to a serviceAccount (or user) and check operation is allowed

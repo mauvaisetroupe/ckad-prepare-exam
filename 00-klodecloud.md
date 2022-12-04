@@ -12,7 +12,7 @@
  - Secrets
  - Security Contexts
  - Resource Limits
- - Service Account
+ - Service Account DONE
  - Taints and Tolerations
  - Node Affinity
 
@@ -40,7 +40,7 @@
 
 07 - Updates for Sep 2021 Changes 11 Topics
  - Practice test Docker Images - DONE
- - Practice Test KubeConfig
+ - Practice Test KubeConfig - DONE
  - Practice Test Role Based Access Controls - DONE
  - Practice Test Cluster Roles
  - Labs – Admission Controllers
