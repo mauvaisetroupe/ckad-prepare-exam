@@ -177,10 +177,12 @@ rules:
 > 
 > Need to edit apiGroups. 
 > Use command kubectl api-resources
-> 
-> $ kubectl api-resources 
-> NAME           SHORTNAMES   APIVERSION   NAMESPACED   KIND
-> deployments    deploy       apps/v1      true         Deployment
+
+<pre>
+$ <b>kubectl api-resources</b>
+NAME           SHORTNAMES   APIVERSION   NAMESPACED   KIND
+deployments    deploy       apps/v1      true         Deployment
+</pre>
 
 <pre>
 apiVersion: rbac.authorization.k8s.io/v1
