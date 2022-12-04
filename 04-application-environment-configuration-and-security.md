@@ -270,3 +270,23 @@ subjects:
   name: michelle
 </pre>
 
+## Admission controllers, find default ones, enable and disable somes
+[//]: # (source 07/Labs – Admission Controllers)
+
+Default admission controllers are in kube-apiserver help
+<pre>
+$ <b>kubectl exec -n kube-system kube-apiserver-minikube -- kube-apiserver -h</b>
+$ kube-apiserver -h |  grep enable-admission-plugins
+--enable-admission-plugins strings  admission plugins that should be enabled in addition to default enabled ones
+(NamespaceLifecycle, LimitRanger, ServiceAccount, TaintNodesByCondition, PodSecurity, Priority, DefaultTolerationSeconds, 
+DefaultStorageClass, StorageObjectInUseProtection, PersistentVolumeClaimResize, RuntimeClass, CertificateApproval,
+CertificateSigning, CertificateSubjectRestriction, DefaultIngressClass, MutatingAdmissionWebhook, ValidatingAdmissionWebhook,
+ResourceQuota)
+</pre>
+
+
+<pre>
+$ <b>vi /etc/kubernetes/manifests/kube-apiserver.yaml</b>
+   - --disable-admission-plugins=DefaultStorageClass
+   - --enable-admission-plugins=NodeRestriction,NamespaceAutoProvision
+</pre>
