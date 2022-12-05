@@ -21,7 +21,7 @@
 - [Discover and use resources that extend Kubernetes (CRD)](04-application-environment-configuration-and-security/01-discover-and-use-resources-that-extend-ubernetes-CRD.md)
 - [Understand authentication, authorization and admission control](./04-application-environment-configuration-and-security/02-understand-authentication-authorization-admission-control.md)
 - Understanding and defining resource requirements, limits and quotas
-- Understand ConfigMaps
+- [Understand ConfigMaps](./04-application-environment-configuration-and-security/04-understand-configmaps.md)
 - [Create & consume Secrets](./04-application-environment-configuration-and-security/05-create-consume-secrets.md)
 - [Understand ServiceAccounts](./04-application-environment-configuration-and-security/06-understand-serviceaccounts.md)
 - Understand SecurityContexts

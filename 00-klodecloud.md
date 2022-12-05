@@ -8,7 +8,7 @@
   
 02 - Configuration 8 Topics
  - [x] Commands and Arguments
- - [ ] ConfigMaps
+ - [X] ConfigMaps
  - [ ] Secrets
  - [ ] Security Contexts
  - [ ] Resource Limits
