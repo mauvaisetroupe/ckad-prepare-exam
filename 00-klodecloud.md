@@ -47,6 +47,6 @@
  - [x] Labs – Validating and Mutating Admission Controllers - DONE
  - [x] Lab – API Versions/Deprecations
  - [x] Practice Test – Custom Resource Definition
- - [ ] Practice Test – Deployment strategies
+ - [x] Practice Test – Deployment strategies
  - [ ] Labs – Install Helm
  - [ ] Labs – Helm Concepts
