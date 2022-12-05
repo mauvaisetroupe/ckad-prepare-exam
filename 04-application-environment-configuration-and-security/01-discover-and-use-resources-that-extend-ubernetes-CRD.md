@@ -1,5 +1,18 @@
 # Application Environment, Configuration and Security - Discover and use resources that extend Kubernetes (CRD)
 
+## Get a list of all CRDs and associated custom objects
+
+Find CRD
+```
+$ kubectl get crd 
+my-specific-crd.mauvaisetroupe.com
+```
+
+Find custom objects (autocompletion should work)
+```
+$ kubectl get -A my-specific-crd.mauvaisetroupe.com
+```
+
 ## Create a CustomResourceDefinition manifest file 
 
 Go to kubernetes documentation and write yaml file 
