@@ -11,7 +11,7 @@
  - [X] ConfigMaps
  - [X] Secrets
  - [ ] Security Contexts
- - [ ] Resource Limits
+ - [x] Resource Limits
  - [ ] Service Account DONE
  - [ ] Taints and Tolerations
  - [ ] Node Affinity
