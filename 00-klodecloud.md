@@ -2,7 +2,7 @@
  - [x] Practice-Test Introduction (06:08)
  - [x] PODs
  - [ ] ReplicaSets
- - [ ] Deployments
+ - [X] Deployments
  - [ ] Namespaces
  - [ ] Imperative Commands
   
