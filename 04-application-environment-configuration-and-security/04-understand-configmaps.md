@@ -35,7 +35,7 @@ $ kubectl explain pods.spec.containers.env.valueFrom
 $ kubectl explain pods.spec.containers.envFrom
 ```
 
-```
+<pre>
 apiVersion: v1
 kind: Pod
 spec:
@@ -47,13 +47,13 @@ spec:
         - name: DEMO_GREETING
           value: "Hello from the environment"
         - name: SPECIAL_LEVEL_KEY
-          valueFrom:
+          <b>valueFrom:</b>
             configMapKeyRef:
               name: special-config
               key: special.how
-      envFrom:
+      <b>envFrom:</b>
         - secretRef:
             name: app-secret
         - confiMapRef:
             name: app-config              
-```
+</pre>
