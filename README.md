@@ -20,11 +20,11 @@
 
 ## Application Environment, Configuration and Security - 25%
 - Discover and use resources that extend Kubernetes (CRD)
-- Understand authentication, authorization and admission control
+- [Understand authentication, authorization and admission control](./04-application-environment-configuration-and-security/02-understand-authentication-authorization-admission-control.md)
 - Understanding and defining resource requirements, limits and quotas
 - Understand ConfigMaps
 - Create & consume Secrets
-- Understand ServiceAccounts
+- [Understand ServiceAccounts](./04-application-environment-configuration-and-security/06-understand-serviceaccounts.md)
 - Understand SecurityContexts
 
 ## Services & Networking - 20%
