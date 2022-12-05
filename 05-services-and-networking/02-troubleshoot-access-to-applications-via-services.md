@@ -12,3 +12,15 @@ dev-namespace   db-service        ClusterIP      10.43.54.161    <none>        6
 ```
 db-service.dev-namespace.svc.cluster.local
 ```
+## Create a pod and specify its exposed port
+
+```
+$ kubectl run custom-nginx --image=nginx --port=8080
+```
+
+## Expose a POD via a ClusterIP service
+[//]: # (source 01 / Imperative Commands)
+
+```
+$ kubectl expose pod redis <b>--name=redis-service</b> --port=6379
+```
