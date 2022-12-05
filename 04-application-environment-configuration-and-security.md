@@ -284,13 +284,13 @@ RuntimeClass, CertificateApproval, CertificateSigning, CertificateSubjectRestric
 MutatingAdmissionWebhook, ValidatingAdmissionWebhook, ResourceQuota)
 </pre>
 
-Default Admission Controller not enabled by default but enabled in the instance
+Enable an Admission Controller not enabled by default:
 <pre>
 $ <b>vi /etc/kubernetes/manifests/kube-apiserver.yaml</b>
    - --enable-admission-plugins=NodeRestriction,NamespaceAutoProvision
 </pre>
 
-Default Admission Controller enabled by default but disabled
+Disable a Admission Controller enabled by default:
 <pre>
 $ <b>vi /etc/kubernetes/manifests/kube-apiserver.yaml</b>
    - --disable-admission-plugins=DefaultStorageClass
