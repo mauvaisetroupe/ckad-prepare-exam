@@ -48,5 +48,5 @@
  - [x] Lab – API Versions/Deprecations
  - [x] Practice Test – Custom Resource Definition
  - [x] Practice Test – Deployment strategies
- - [ ] Labs – Install Helm
- - [ ] Labs – Helm Concepts
+ - [x] Labs – Install Helm
+ - [x] Labs – Helm Concepts
