@@ -19,7 +19,7 @@
 - Debugging in Kubernetes
 
 ## Application Environment, Configuration and Security - 25%
-- Discover and use resources that extend Kubernetes (CRD)
+- [Discover and use resources that extend Kubernetes (CRD)](04-application-environment-configuration-and-security/01-discover-and-use-resources-that-extend-ubernetes-CRD.md)
 - [Understand authentication, authorization and admission control](./04-application-environment-configuration-and-security/02-understand-authentication-authorization-admission-control.md)
 - Understanding and defining resource requirements, limits and quotas
 - Understand ConfigMaps
