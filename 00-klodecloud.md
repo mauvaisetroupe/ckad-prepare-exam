@@ -1,6 +1,6 @@
 01 - Recap Core Concepts 6 Topics
- - [ ] Practice-Test Introduction (06:08)
- - [ ] PODs
+ - [x] Practice-Test Introduction (06:08)
+ - [x] PODs
  - [ ] ReplicaSets
  - [ ] Deployments
  - [ ] Namespaces

@@ -1,6 +1,18 @@
 # Application Design and Build - Define, build and modify container images
 [//]: # (source 07 / Practice test Docker Images)
 
+## List and Create pod
+[//]: # (source 01 / PODS)
+```
+kubectl get pods -A
+kubectl run nginx --inage=nginx  
+```
+
+## Get pods image, Node deployed, ...
+```
+kubectl descrbe pod mypod-tbtb2
+```
+
 ## Docker Image
 ### List docker images
 ```
@@ -37,3 +49,5 @@ $ docker run -p 9090:8080 my-image-name
 
 ### Push image to repository
 TODO
+
+
