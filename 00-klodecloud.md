@@ -45,7 +45,7 @@
  - [x] Practice Test Cluster Roles - DONE
  - [x] Labs – Admission Controllers - DONE
  - [x] Labs – Validating and Mutating Admission Controllers - DONE
- - [ ] Lab – API Versions/Deprecations
+ - [x] Lab – API Versions/Deprecations
  - [ ] Practice Test – Custom Resource Definition
  - [ ] Practice Test – Deployment strategies
  - [ ] Labs – Install Helm
