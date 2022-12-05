@@ -1,10 +1,10 @@
 # Application Design and Build - Define, build and modify container images
 
-## List and Create pod
+## List and Create pod, with specific label
 [//]: # (source 01 / PODS)
 ```
 kubectl get pods -A
-kubectl run nginx --inage=nginx  
+kubectl run nginx --image=nginx --labels="app=myapp"
 ```
 
 ## Get pods image, Node deployed, ...
