@@ -1,5 +1,5 @@
-# Define, build and modify container images
-(source 07 / Practice test Docker Images)
+# Application Design and Build - Define, build and modify container images
+[//]: # (source 07 / Practice test Docker Images)
 
 ## Docker Image
 ### List docker images
@@ -37,9 +37,3 @@ $ docker run -p 9090:8080 my-image-name
 
 ### Push image to repository
 TODO
-
-# Understand Jobs and CronJobs
-
-# Understand multi-container Pod design patterns (e.g. sidecar, init and others)
-
-# Utilize persistent and ephemeral volumes
