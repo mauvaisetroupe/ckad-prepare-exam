@@ -4,7 +4,7 @@
  - [ ] ReplicaSets
  - [X] Deployments
  - [X] Namespaces
- - [ ] Imperative Commands
+ - [x] Imperative Commands
   
 02 - Configuration 8 Topics
  - [ ] Commands and Arguments
