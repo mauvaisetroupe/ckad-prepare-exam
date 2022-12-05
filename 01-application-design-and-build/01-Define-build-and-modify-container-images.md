@@ -1,5 +1,4 @@
 # Application Design and Build - Define, build and modify container images
-[//]: # (source 07 / Practice test Docker Images)
 
 ## List and Create pod
 [//]: # (source 01 / PODS)
@@ -14,6 +13,8 @@ kubectl descrbe pod mypod-tbtb2
 ```
 
 ## Docker Image
+[//]: # (source 07 / Practice test Docker Images)
+
 ### List docker images
 ```
 $ docker image ls

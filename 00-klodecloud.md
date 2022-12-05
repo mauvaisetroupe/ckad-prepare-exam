@@ -3,7 +3,7 @@
  - [x] PODs
  - [ ] ReplicaSets
  - [X] Deployments
- - [ ] Namespaces
+ - [X] Namespaces
  - [ ] Imperative Commands
   
 02 - Configuration 8 Topics
