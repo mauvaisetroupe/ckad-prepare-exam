@@ -51,4 +51,23 @@ $ docker run -p 9090:8080 my-image-name
 ### Push image to repository
 TODO
 
+## Entrypoint and command
+
+
+| Dockerfile | Pod.yaml | Result |
+ -- |--|--
+| ENTRYPOINT ["python", "app.py"] | command: ["--color","green"] | --color green |
+|CMD ["--color", "red"] |||
+
+
+| Dockerfile | Pod.yaml | Result |
+ -- |--|--
+| ENTRYPOINT ["python", "app.py"] | command: ["python", "app.py"] | python app.py --color pink|
+|CMD ["--color", "red"] | args: ["--color", "pink"] | |
+
+| Dockerfile | Pod.yaml | Result |
+ -- |--|--
+| ENTRYPOINT ["python", "app.py"] |  | python app.py --color pink|
+|CMD ["--color", "red"] | args: ["--color", "pink"] | |
+
 

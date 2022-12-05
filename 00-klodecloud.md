@@ -7,7 +7,7 @@
  - [x] Imperative Commands
   
 02 - Configuration 8 Topics
- - [ ] Commands and Arguments
+ - [x] Commands and Arguments
  - [ ] ConfigMaps
  - [ ] Secrets
  - [ ] Security Contexts
