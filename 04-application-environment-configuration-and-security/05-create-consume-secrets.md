@@ -18,6 +18,11 @@ $ kubectl create secret <b>generic</b> db-secret
 
 ## use all keys from a secret in a pod
 
+```
+$ kubectl explain pod.spec.containers.env.valueFrom
+$ kubectl explain pod.spec.containers.envFrom
+```
+
 > **Warning**
 > 
 > secretRef and not secretMapRef 
