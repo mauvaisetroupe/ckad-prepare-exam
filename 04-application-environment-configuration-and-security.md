@@ -270,7 +270,7 @@ subjects:
   name: michelle
 </pre>
 
-## Admission controllers, find default ones, enable and disable somes
+## Find default admission controllers, find ones enabled and disabled
 [//]: # (source 07/Labs – Admission Controllers)
 
 Default admission controllers are in kube-apiserver help
@@ -284,9 +284,14 @@ RuntimeClass, CertificateApproval, CertificateSigning, CertificateSubjectRestric
 MutatingAdmissionWebhook, ValidatingAdmissionWebhook, ResourceQuota)
 </pre>
 
+Default Admission Controller not enabled by default but enabled in the instance
+<pre>
+$ <b>vi /etc/kubernetes/manifests/kube-apiserver.yaml</b>
+   - --enable-admission-plugins=NodeRestriction,NamespaceAutoProvision
+</pre>
 
+Default Admission Controller enabled by default but disabled
 <pre>
 $ <b>vi /etc/kubernetes/manifests/kube-apiserver.yaml</b>
    - --disable-admission-plugins=DefaultStorageClass
-   - --enable-admission-plugins=NodeRestriction,NamespaceAutoProvision
 </pre>
