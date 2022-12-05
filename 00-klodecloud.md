@@ -9,7 +9,7 @@
 02 - Configuration 8 Topics
  - [x] Commands and Arguments
  - [X] ConfigMaps
- - [ ] Secrets
+ - [X] Secrets
  - [ ] Security Contexts
  - [ ] Resource Limits
  - [ ] Service Account DONE
