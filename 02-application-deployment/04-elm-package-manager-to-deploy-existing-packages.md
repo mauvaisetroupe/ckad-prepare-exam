@@ -13,8 +13,8 @@ $ cat /etc/*release*
 [//]: # (source 07/Labs – Helm Concepts)
 ```
 $ helm search hub wordpress
-URL                             CHART VERSION	APP VERSION        	DESCRIPTION                                       
-https://artifacthub.io/pac...	0.1.0        	1.1                	this is my wordpress package    
+URL                     CHART VERSION	APP VERSION     DESCRIPTION
+https://artifacth...	0.1.0        	1.1             this is my wordpress package
 ```
 
 ## List repositories and add a bitnami helm chart repository
