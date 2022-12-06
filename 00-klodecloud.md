@@ -18,7 +18,7 @@
 
 03 - Multi-Container PODs 5 Topics
  - [x] Multi-Container PODs
- - [ ] Readiness Probes
+ - [x] Readiness Probes
  - [ ] Logging
  - [ ] Monitoring
  - [ ] Init Containers
