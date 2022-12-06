@@ -10,9 +10,9 @@
  - [x] Commands and Arguments
  - [X] ConfigMaps
  - [X] Secrets
- - [ ] Security Contexts
+ - [x] Security Contexts
  - [x] Resource Limits
- - [ ] Service Account DONE
+ - [x] Service Account
  - [ ] Taints and Tolerations
  - [ ] Node Affinity
 
@@ -39,12 +39,12 @@
  - [ ] Storage Class
 
 07 - Updates for Sep 2021 Changes 11 Topics
- - [x] Practice test Docker Images - DONE
- - [x] Practice Test KubeConfig - DONE
- - [x] Practice Test Role Based Access Controls - DONE
- - [x] Practice Test Cluster Roles - DONE
- - [x] Labs – Admission Controllers - DONE
- - [x] Labs – Validating and Mutating Admission Controllers - DONE
+ - [x] Practice test Docker Images
+ - [x] Practice Test KubeConfig
+ - [x] Practice Test Role Based Access Controls
+ - [x] Practice Test Cluster Roles
+ - [x] Labs – Admission Controllers
+ - [x] Labs – Validating and Mutating Admission Controllers
  - [x] Lab – API Versions/Deprecations
  - [x] Practice Test – Custom Resource Definition
  - [x] Practice Test – Deployment strategies

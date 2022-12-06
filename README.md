@@ -24,7 +24,7 @@
 - [Understand ConfigMaps](./04-application-environment-configuration-and-security/04-understand-configmaps.md)
 - [Create & consume Secrets](./04-application-environment-configuration-and-security/05-create-consume-secrets.md)
 - [Understand ServiceAccounts](./04-application-environment-configuration-and-security/06-understand-serviceaccounts.md)
-- Understand SecurityContexts
+- [Understand SecurityContexts](./04-application-environment-configuration-and-security/07-securitycontexts.md)
 
 ## Services & Networking - 20%
 - [Demonstrate basic understanding of NetworkPolicies](./05-services-and-networking/01-demonstrate-basic-understanding-of-networkPolicies.md)
