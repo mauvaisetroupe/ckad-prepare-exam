@@ -13,7 +13,7 @@
  - [x] Security Contexts
  - [x] Resource Limits
  - [x] Service Account
- - [ ] Taints and Tolerations
+ - [x] Taints and Tolerations
  - [ ] Node Affinity
 
 03 - Multi-Container PODs 5 Topics
