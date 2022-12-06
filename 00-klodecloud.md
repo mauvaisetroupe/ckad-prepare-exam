@@ -17,7 +17,7 @@
  - [x] Node Affinity
 
 03 - Multi-Container PODs 5 Topics
- - [ ] Multi-Container PODs
+ - [x] Multi-Container PODs
  - [ ] Readiness Probes
  - [ ] Logging
  - [ ] Monitoring
