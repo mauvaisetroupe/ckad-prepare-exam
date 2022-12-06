@@ -64,7 +64,7 @@ spec:
 </pre>
 
 
-## Which node is the POD mosquito on now?
+## Which node is the POD nginx on now?
 
 ```
 $ kubernetes get pods -o wide
@@ -73,6 +73,6 @@ nginx      1/1     Running   0          5m14s   10.244.1.2   node01         <non
 ```
 
 ```
-$ kubernetes describe pod mosquito | grep -i node:
-Node:         controlplane/10.33.196.3
+$ kubernetes describe pod nginx | grep -i node:
+Node:         node01/10.33.196.3
 ```
