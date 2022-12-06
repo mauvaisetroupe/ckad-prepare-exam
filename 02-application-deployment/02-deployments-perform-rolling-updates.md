@@ -64,15 +64,33 @@ spec:
 </pre>
 
 
-### Which node is the POD nginx on now?
+## Label and node selector
+
+### Apply a label color=blue to node node01
 
 ```
-$ kubernetes get pods -o wide
-NAME       READY   STATUS    RESTARTS   AGE     IP           NODE           NOMINATED NODE   READINESS GATES
-nginx      1/1     Running   0          5m14s   10.244.1.2   node01         <none>           <none>
+$ kubernetes label nodes node01 color=blue
 ```
 
-```
-$ kubernetes describe pod nginx | grep -i node:
-Node:         node01/10.33.196.3
-```
+### Create a new deployment named blue with the nginx image and 3 replicas, with node affinitty to node 1
+
+<pre>
+$ kuberetes create deploy blue --image=nginx --replicas=3
+
+$ kuberetes edit deploy blue
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  template:
+    spec:
+      <b>affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: color
+                operator: In
+                values:
+                - blue</b>
+
+</pre>

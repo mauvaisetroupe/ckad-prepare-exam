@@ -14,7 +14,7 @@
  - [x] Resource Limits
  - [x] Service Account
  - [x] Taints and Tolerations
- - [ ] Node Affinity
+ - [x] Node Affinity
 
 03 - Multi-Container PODs 5 Topics
  - [ ] Multi-Container PODs
