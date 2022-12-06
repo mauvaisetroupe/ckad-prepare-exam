@@ -18,7 +18,7 @@ A toleration "matches" a taint if the keys are the same and the effects are the 
 - the operator is Exists (in which case no value should be specified), or
 - the operator is Equal and the values are equal.
 
-## Find taint on a Node
+### Find taint on a Node
 
 ```
 $ kubectl describe node node01 | grep -A5 -i taint
@@ -30,13 +30,13 @@ Lease:
   RenewTime:       Tue, 06 Dec 2022 11:17:38 +0000
 ```
 
-## Create a taint on node01 with key of spray, value of frontend and effect of NoSchedule
+### Create a taint on node01 with key of spray, value of frontend and effect of NoSchedule
 
 ```
 $ kubectl taint node node01 spray=frontend:NoSchedule
 ```
 
-## Remove the taint on a node which currently has the taint effect of NoSchedule.
+### Remove the taint on a node which currently has the taint effect of NoSchedule.
 
 <pre>
 $ kubernetes describe nodes node01 | grep i taint
@@ -44,7 +44,7 @@ Taints:             spray=frontend:NoSchedule
 $ kubectl taint node node01 spray=frontend:NoSchedule-
 </pre>
 
-## Create a pod named  with the nginx image, which has a toleration set to the taint frontend.
+### Create a pod named  with the nginx image, which has a toleration set to the taint frontend.
 
 <pre>
 $ kubernetes run nging --image=nginx --dry-run=client -o yaml > nginx.yaml
@@ -64,7 +64,7 @@ spec:
 </pre>
 
 
-## Which node is the POD nginx on now?
+### Which node is the POD nginx on now?
 
 ```
 $ kubernetes get pods -o wide
