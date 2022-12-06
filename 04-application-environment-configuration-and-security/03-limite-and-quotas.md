@@ -1,6 +1,6 @@
 # Application Environment, Configuration and Security - Understanding and defining resource requirements, limits and quotas
 
-## Add CPU and memory reuirements and limits
+## Add CPU and memory requirements and limits
 [//]: # (source 02 / Resource limits)
 
 <pre>
