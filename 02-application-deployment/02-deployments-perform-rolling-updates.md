@@ -1,6 +1,16 @@
 # Application Deployment -  Understand Deployments and how to perform rolling updates
 
-## create a new deployment
+[Create a deployment](#create-a-new-deployment)
+
+[Taint and toleration](#taint-and-toleration)
+
+[Label and node selector](#label-and-node-selector)
+
+---
+
+## Create a new deployment
+
+### Create a deployment with a specific image
 
 [//]: # (source 01 / Deployments)
 
@@ -8,7 +18,7 @@
 $ kubectl create deployment httpd-frontend --image=httpd:2.4-alpine --replicas=3
 ```
 
-## Find error in ReplicatSet selector
+### Find error in ReplicatSet selector
 [//]: # (source 04/Label and Selectors)
 
 <pre>
@@ -33,6 +43,7 @@ spec:
 
 **`selector` does not match template `labels`**
 
+---
 ## Taint and toleration
 [//]: # (source 02 / Taints and Tolerations)
 
@@ -88,7 +99,7 @@ spec:
         value: frontend</b>
 </pre>
 
-
+---
 ## Label and node selector
 
 ### Apply a label color=blue to node node01
@@ -120,5 +131,6 @@ spec:
 
 </pre>
 
+---
 
 
