@@ -3,6 +3,13 @@
 ## Add CPU and memory requirements and limits
 [//]: # (source 02 / Resource limits)
 
+
+>**Warning**
+>
+> A container CANNOT use more CPU resources than its limit
+> 
+> A container CAN use more memory resources that its limit but POD will be terminated
+
 <pre>
 apiVersion: v1
 kind: Pod
