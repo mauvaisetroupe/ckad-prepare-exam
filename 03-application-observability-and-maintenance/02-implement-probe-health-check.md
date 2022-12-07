@@ -2,6 +2,7 @@
 
 
 ## Liveness and readiness probes in pod yaml
+[//]: # (source 03 / Readiness Probes)
 
 ```
 apiVersion: v1
