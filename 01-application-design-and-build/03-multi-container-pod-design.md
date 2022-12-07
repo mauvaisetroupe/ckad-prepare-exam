@@ -13,3 +13,24 @@ spec:
   - image: 
     name: sidecar
 ```
+
+## Create a pod with a initContainer
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: red
+  namespace: default
+spec:
+  containers:
+    image: busybox:1.28
+    name: mycontainer
+    ...
+  initContainers:
+  - image: busybox
+    name: myinitcontainer
+    command: 
+      - "sleep"
+      - "30"
+```      

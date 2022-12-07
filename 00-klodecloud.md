@@ -21,7 +21,7 @@
  - [x] Readiness Probes
  - [x] Logging
  - [x] Monitoring
- - [ ] Init Containers
+ - [x] Init Containers
 
 04 - POD Design 3 Topics
  - [ ] Labels and Selectors
