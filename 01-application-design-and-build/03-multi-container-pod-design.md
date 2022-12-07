@@ -15,6 +15,8 @@ spec:
 ```
 
 ## Create a pod with a initContainer
+[//]: # (source 03 / Init container)
+
 
 ```
 apiVersion: v1
