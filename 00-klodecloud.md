@@ -20,7 +20,7 @@
  - [x] Multi-Container PODs
  - [x] Readiness Probes
  - [x] Logging
- - [ ] Monitoring
+ - [x] Monitoring
  - [ ] Init Containers
 
 04 - POD Design 3 Topics
