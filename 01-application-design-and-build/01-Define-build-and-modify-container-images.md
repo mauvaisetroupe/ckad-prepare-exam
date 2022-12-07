@@ -1,5 +1,12 @@
 # Application Design and Build - Define, build and modify container images
 
+[Pods](#list-and-create-pod-with-specific-label)
+
+[Docker](#docker-image)
+
+[Entrypoint and command](#entrypoint-and-command)
+
+---
 ## List and Create pod, with specific label
 [//]: # (source 01 / PODS)
 ```
@@ -11,6 +18,8 @@ kubectl run nginx --image=nginx --labels="app=myapp"
 ```
 kubectl describe pod mypod-tbtb2
 ```
+
+---
 
 ## Docker Image
 [//]: # (source 07 / Practice test Docker Images)
@@ -50,6 +59,8 @@ $ docker run -p 9090:8080 my-image-name
 
 ### Push image to repository
 TODO
+
+---
 
 ## Entrypoint and command
 
