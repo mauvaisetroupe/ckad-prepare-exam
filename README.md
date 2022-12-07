@@ -15,7 +15,7 @@
 - [Implement probes and health checks](./03-application-observability-and-maintenance/02-implement-probe-health-check.md)
 - [Use provided tools to monitor Kubernetes applications](./03-application-observability-and-maintenance/03-use-provided-tools-to-monitor.md)
 - [Utilize container logs](./03-application-observability-and-maintenance/04-utilize-conatiner-log.md)
-- Debugging in Kubernetes
+- [Debugging in Kubernetes](./03-application-observability-and-maintenance/05-debugging-in-kubernetes.md)
 
 ## 04 - Application Environment, Configuration and Security - 25%
 - [Discover and use resources that extend Kubernetes (CRD)](04-application-environment-configuration-and-security/01-discover-and-use-resources-that-extend-ubernetes-CRD.md)
