@@ -6,6 +6,9 @@
 
 [Label and node selector](#label-and-node-selector)
 
+[Rollout](#how-many-pods-could-be-stop-during-a-rollingupdate)
+
+
 ---
 
 ## Create a new deployment
@@ -133,4 +136,69 @@ spec:
 
 ---
 
+## How many pods could be stop during a RollingUpdate
 
+```
+$ kubectl describe deployments.apps frontend 
+...
+StrategyType:           RollingUpdate
+RollingUpdateStrategy:  25% max unavailable, 25% max surge```
+```
+
+## Create deployment, update image and show rollout history
+
+```
+$ kubectl create deployment nginx --image=nginx:1.16
+$ kubectl set image deployment nginx nginx=nginx:1.17 --record
+$ kubectl set image deployment nginx nginx=nginx:latest --record
+```
+
+<pre>
+<b>$ kubectl rollout history deployment nginx</b>
+REVISION  CHANGE-CAUSE
+1         None
+2         kubectl set image deployment nginx nginx=nginx:1.17 --record=true
+3         kubectl set image deployment nginx nginx=nginx:latest --record=true
+</pre>
+
+<pre>
+$ <b>kubectl rollout history deployment nginx --revision=1</b>
+deployment.apps/nginx with revision #1
+Pod Template:
+  Labels:	app=nginx
+	pod-template-hash=6c4b465475
+  Containers:
+   nginx:
+    Image:	nginx:1.16
+    Port:	<none>
+    Host Port:	<none>
+    Environment:	<none>
+    Mounts:	<none>
+  Volumes:	<none>
+</pre>
+
+## Rollback to previous version
+
+```
+$ kubectl rollout undo deployment nginx
+```
+
+```
+$ kubectl rollout history deployment nginx
+REVISION  CHANGE-CAUSE
+1         <none>
+3         kubectl set image deployment nginx nginx=nginx:latest --record=true
+4         kubectl set image deployment nginx nginx=nginx:1.17 --record=true
+```
+
+>**Info**
+>
+>Revision 2 disapear, because rollbacking from rev=3 to previous revision, rev=2 promoted to rev=4 
+
+
+
+## Rollback to a specific revision in history
+
+```
+$ kubectl rollout undo deployment nginx --to-revision=1
+```

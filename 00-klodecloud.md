@@ -25,7 +25,7 @@
 
 04 - POD Design 3 Topics
  - [x] Labels and Selectors
- - [ ] Rolling Updates & Rollbacks
+ - [x] Rolling Updates & Rollbacks
  - [ ] Jobs and CronJobs
 
 05 - Services & Networking 4 Topics
