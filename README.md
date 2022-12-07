@@ -8,7 +8,7 @@
 ## 02 - Application Deployment - 20%  
 - [Use Kubernetes primitives to implement common deployment strategies (e.g. blue/ green or canary)](./02-application-deployment/01-use-Kubernetes-primitives-to-implement-common-deployment-strategies.md)
 - [Understand Deployments and how to perform rolling updates](./02-application-deployment/02-deployments-perform-rolling-updates.md)
-- [Use the Helm package manager to deploy existing packages](02-application-deployment/04-elm-package-manager-to-deploy-existing-packages.md)
+- [Use the Helm package manager to deploy existing packages](02-application-deployment/03-elm-package-manager-to-deploy-existing-packages.md)
 
 ## 03 - Application observability and maintenance - 15%
 - [Understand API deprecations](./03-application-observability-and-maintenance/01-understand-API-deprecations.md)
