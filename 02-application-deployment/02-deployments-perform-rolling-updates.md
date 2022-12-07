@@ -8,6 +8,31 @@
 $ kubectl create deployment httpd-frontend --image=httpd:2.4-alpine --replicas=3
 ```
 
+## Find error in ReplicatSet selector
+[//]: # (source 04/Label and Selectors)
+
+<pre>
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+   name: replicaset-1
+spec:
+   replicas: 2
+   selector:
+      matchLabels:
+        <b>tier: front-end</b>
+   template:
+     metadata:
+       labels:
+        <b>tier: nginx</b>
+     spec:
+       containers:
+       - name: nginx
+         image: nginx
+</pre>
+
+**`selector` does not match template `labels`**
+
 ## Taint and toleration
 [//]: # (source 02 / Taints and Tolerations)
 
@@ -94,3 +119,6 @@ spec:
                 - blue</b>
 
 </pre>
+
+
+

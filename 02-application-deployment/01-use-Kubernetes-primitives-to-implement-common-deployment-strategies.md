@@ -48,3 +48,20 @@ spec:
   selector:
     app: myapp
 </pre>
+
+## Find pods with specific label
+[//]: # (source 04/Label and Selectors)
+
+```
+kubectl get pods --show-labels 
+```
+
+```
+kubectl get pods --selector=foo=bar 
+```
+
+```
+kubectl get pods --selector="env=prod,bu=finance,tier=frontend" --show-labels 
+NAME          READY   STATUS    RESTARTS   AGE   LABELS
+app-1-zzxdf   1/1     Running   0          11m   bu=finance,env=prod,tier=frontend
+```

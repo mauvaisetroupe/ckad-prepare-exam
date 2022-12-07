@@ -9,7 +9,7 @@ kubectl run nginx --image=nginx --labels="app=myapp"
 
 ## Get pods image, Node deployed, ...
 ```
-kubectl descrbe pod mypod-tbtb2
+kubectl describe pod mypod-tbtb2
 ```
 
 ## Docker Image

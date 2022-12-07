@@ -24,7 +24,7 @@
  - [x] Init Containers
 
 04 - POD Design 3 Topics
- - [ ] Labels and Selectors
+ - [x] Labels and Selectors
  - [ ] Rolling Updates & Rollbacks
  - [ ] Jobs and CronJobs
 
