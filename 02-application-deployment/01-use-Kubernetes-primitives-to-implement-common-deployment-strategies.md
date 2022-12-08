@@ -2,6 +2,11 @@
 # Application Deployment - Use Kubernetes primitives to implement common deployment strategies 
 [//]: # (source 07/Lab – Practice Test – Deployment strategies)
 
+[Find info](#find-deployment-strategy-used-for-a-deployment)
+
+[Implement Canary or blue/green](#implement-canary-or-bluegreen)
+
+---
 ## Find deployment strategy used for a deployment
 
 <pre>
@@ -16,30 +21,45 @@ Labels:                 app=myapp
 
 ## Find NodePort service exposing deployment
 
-**Check that service selector match deployment label**
+See [here](../05-services-and-networking/02-troubleshoot-access-to-applications-via-services.md#find-nodeport-service-exposing-deployment)
 
-<pre>
-$ <b>kubernetes get deployments.apps --show-labels </b>
-NAME              READY   UP-TO-DATE   AVAILABLE   AGE     LABELS
-mydeployment      5/5     5            5           3m29s   <b>app=myapp,tier=frontend</b>
-mydeployment-v2   2/2     2            2           105s    <b>app=myapp</b>
-</pre> 
+## Find pods with specific label
+[//]: # (source 04/Label and Selectors)
 
+```
+kubectl get pods --show-labels 
+```
 
-<pre>
-$ <b>kubernetes get service -o wide</b>
-NAME               TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE     SELECTOR
-mydeployment       NodePort    10.97.165.71   <none>        8080:30080/TCP   2m29s   <b>tier=frontend</b>
-</pre>
+```
+kubectl get pods --selector env=prod,bu=finance,tier=frontend --show-labels 
+NAME          READY   STATUS    RESTARTS   AGE   LABELS
+app-1-zzxdf   1/1     Running   0          11m   bu=finance,env=prod,tier=frontend
+```
 
+## Find service with specific selector
 
-## decrease replicas of a deployment
+>**Warning**
+>
+> --selector is used to find services with specific label, not filtering on selector
+> 
+
+```
+kubectl get svc --selector bu=finance --show-labels -o wide
+NAME    TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE     SELECTOR     LABELS
+app-1   ClusterIP   10.43.90.86   <none>        3306/TCP   7m43s   name=app-2   bu=finance,env=prod
+```
+
+---
+
+## Implement Canary or Blue/Green
+
+### decrease replicas of a deployment
 
 <pre>
 $ kubectl scale deployment mydeployment-v2 --replicas=1
 </pre>
 
-## change label selector in deployment
+### change label selector in service to expose another deployment
 
 <pre>
 $ <b>kubectl edit service frontend-service </b>
@@ -52,19 +72,3 @@ spec:
     app: myapp
 </pre>
 
-## Find pods with specific label
-[//]: # (source 04/Label and Selectors)
-
-```
-kubectl get pods --show-labels 
-```
-
-```
-kubectl get pods --selector=foo=bar 
-```
-
-```
-kubectl get pods --selector="env=prod,bu=finance,tier=frontend" --show-labels 
-NAME          READY   STATUS    RESTARTS   AGE   LABELS
-app-1-zzxdf   1/1     Running   0          11m   bu=finance,env=prod,tier=frontend
-```
