@@ -19,7 +19,10 @@ spec:
 
 
 ## create a Job which prints "Hello World"
+
+```
 kubectl create job hello --image=busybox:1.28 -- echo "Hello World"
+```
 
 ## List jobs and associated Pods
 
