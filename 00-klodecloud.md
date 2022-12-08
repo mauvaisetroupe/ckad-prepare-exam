@@ -29,7 +29,7 @@
  - [x] Jobs and CronJobs
 
 05 - Services & Networking 4 Topics
- - [ ] Kubernetes Services
+ - [x] Kubernetes Services
  - [ ] Network Policies
  - [ ] Ingress Networking – 1
  - [ ] Ingress Networking – 2
