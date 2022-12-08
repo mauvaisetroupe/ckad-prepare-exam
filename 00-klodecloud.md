@@ -26,7 +26,7 @@
 04 - POD Design 3 Topics
  - [x] Labels and Selectors
  - [x] Rolling Updates & Rollbacks
- - [ ] Jobs and CronJobs
+ - [x] Jobs and CronJobs
 
 05 - Services & Networking 4 Topics
  - [ ] Kubernetes Services

@@ -1,6 +1,6 @@
 ## 01 - Application Design and Build - 20%
 - [Define, build and modify container images](./01-application-design-and-build/01-Define-build-and-modify-container-images.md)
-- Understand Jobs and CronJobs
+- [Understand Jobs and CronJobs](./01-application-design-and-build/02-understand-jobs-and-cronjobs.md)
 - [Understand multi-container Pod design patterns (e.g. sidecar, init and others)](./01-application-design-and-build/03-multi-container-pod-design.md)
 - Utilize persistent and ephemeral volumes
 
