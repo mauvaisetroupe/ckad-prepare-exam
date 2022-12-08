@@ -4,17 +4,7 @@
 [//]: # (source 04/Jobs and CronJobs)
 
 <pre>
-$ <b>kuberneted create job throw-dice-job --image=throw-dice --dry-run=client -o yaml</b>
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: throw-dice-job
-spec:
-  template:
-    spec:
-      containers:
-      - image: throw-dice
-        name: throw-dice-job
+$ kuberneted create job throw-dice-job --image=throw-dice
 </pre>
 
 
@@ -47,6 +37,7 @@ throw-dice-job-rq8zw   0/1     Completed   0          115s
 ## change completions, backoffLimit and parallelism
 
 <pre>
+$ <b>kuberneted create job throw-dice-job --image=throw-dice --dry-run=client -o yaml</b>
 apiVersion: batch/v1
 kind: Job
 spec:
