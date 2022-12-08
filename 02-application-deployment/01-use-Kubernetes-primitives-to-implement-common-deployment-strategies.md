@@ -5,28 +5,31 @@
 ## Find deployment strategy used for a deployment
 
 <pre>
+$ <b>kubernetes describe deployments mydeployment</b>
+Name:                   frontend
+Namespace:              default
+Labels:                 app=myapp
+                        tier=frontend
+<b>StrategyType:           RollingUpdate</b>
+</pre>
+
+
+## Find NodePort service exposing deployment
+
+**Check that service selector match deployment label**
+
+<pre>
 $ <b>kubernetes get deployments.apps --show-labels </b>
 NAME              READY   UP-TO-DATE   AVAILABLE   AGE     LABELS
 mydeployment      5/5     5            5           3m29s   <b>app=myapp,tier=frontend</b>
 mydeployment-v2   2/2     2            2           105s    <b>app=myapp</b>
 </pre> 
 
-<pre>
-$ <b>kubernetes describe deployments mydeployment</b>
-Name:                   frontend
-Namespace:              default
-Labels:                 app=myapp
-                        tier=frontend
-StrategyType:           RollingUpdate
-</pre>
-
-
-## Find NodePort service exposing deployment
 
 <pre>
 $ <b>kubernetes get service -o wide</b>
 NAME               TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE     SELECTOR
-mydeployment       NodePort    10.97.165.71   <none>        8080:30080/TCP   2m29s   app=frontend
+mydeployment       NodePort    10.97.165.71   <none>        8080:30080/TCP   2m29s   <b>tier=frontend</b>
 </pre>
 
 
