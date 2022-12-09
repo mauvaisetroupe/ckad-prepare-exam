@@ -37,7 +37,7 @@ throw-dice-job-rq8zw   0/1     Completed   0          115s
 ## change completions, backoffLimit and parallelism
 
 <pre>
-$ <b>kuberneted create job throw-dice-job --image=throw-dice --dry-run=client -o yaml</b>
+$ <b>kubectl create job throw-dice-job --image=throw-dice --dry-run=client -o yaml</b>
 apiVersion: batch/v1
 kind: Job
 spec:
