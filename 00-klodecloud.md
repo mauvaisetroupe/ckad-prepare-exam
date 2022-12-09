@@ -31,7 +31,7 @@
 05 - Services & Networking 4 Topics
  - [x] Kubernetes Services
  - [x] Network Policies
- - [ ] Ingress Networking – 1
+ - [x] Ingress Networking – 1
  - [ ] Ingress Networking – 2
 
 06 - State Persistence 2 Topics

@@ -29,4 +29,4 @@
 ## 05 - Services & Networking - 20%
 - [Demonstrate basic understanding of NetworkPolicies](./05-services-and-networking/01-demonstrate-basic-understanding-of-networkPolicies.md)
 - [Provide and troubleshoot access to applications via services](./05-services-and-networking/02-troubleshoot-access-to-applications-via-services.md)
-- Use Ingress rules to expose applications
+- [Use Ingress rules to expose applications](./05-services-and-networking/03-use-ingress-rules-to-expose-applications.md)
