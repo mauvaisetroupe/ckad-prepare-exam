@@ -37,4 +37,4 @@ spec:
       - "30"
 ```      
 
-[next](../02-application-deployment/01-use-Kubernetes-primitives-to-implement-common-deployment-strategies.md)
+[next](./04-utilize-persistent-and-ephemeral-volumes.md)
