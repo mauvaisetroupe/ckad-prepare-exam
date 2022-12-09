@@ -82,3 +82,5 @@ dev-namespace   db-service        ClusterIP      10.43.54.161    <none>        6
 ```
 db-service.dev-namespace.svc.cluster.local
 ```
+
+[next](./03-use-ingress-rules-to-expose-applications.md)

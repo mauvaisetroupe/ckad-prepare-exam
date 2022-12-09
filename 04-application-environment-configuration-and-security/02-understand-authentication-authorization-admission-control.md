@@ -247,3 +247,5 @@ Disable a Admission Controller enabled by default:
 $ <b>vi /etc/kubernetes/manifests/kube-apiserver.yaml</b>
    - --disable-admission-plugins=DefaultStorageClass
 </pre>
+
+[next](./03-limite-and-quotas.md)

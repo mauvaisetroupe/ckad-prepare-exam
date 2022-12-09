@@ -42,4 +42,6 @@ spec:
     <b>envFrom</b>:
     - secretRef:
         name: db-secret
-<pre>
+</pre>
+
+[next](./06-understand-serviceaccounts.md)

@@ -47,3 +47,6 @@ spec:
 <pre>
 $ <b>kubectl set serviceaccount deployment web-dashboard dashboard-sa</b>
 </pre>
+
+
+[next](./07-securitycontexts.md)

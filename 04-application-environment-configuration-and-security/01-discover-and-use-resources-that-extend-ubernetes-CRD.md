@@ -42,3 +42,5 @@ spec:
 ```
 $ kubectl apply -f resourcedefinition.yaml
 ```
+
+[next](./02-understand-authentication-authorization-admission-control.md)

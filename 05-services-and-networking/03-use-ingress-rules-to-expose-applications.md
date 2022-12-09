@@ -5,7 +5,7 @@
 
 >**Warning**
 >
-> kubectl get all -A do not return ingress resources
+> 'kubectl get all -A' do not return ingress resources
 
 ```
 $ kubernetes get ingress -A
@@ -42,8 +42,28 @@ spec:
 ## create an ingress
 
 ```
-kubectl create ingress test-ingress -n critical-space 
-    --rule="/pay*=pay-service:8282" 
-    --annotation="nginx.ingress.kubernetes.io/rewrite-target=/" 
+kubectl create ingress test-ingress -n critical-space \
+    --rule="/pay*=pay-service:8282" \
+    --annotation="nginx.ingress.kubernetes.io/rewrite-target=/" \
     --annotation="nginx.ingress.kubernetes.io/ssl-redirect=fasle"
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: fasle
+  name: test-ingress
+  namespace: critical-space
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: pay-service
+            port:
+              number: 8282
+        path: /pay
+        pathType: Prefix
+
 ```

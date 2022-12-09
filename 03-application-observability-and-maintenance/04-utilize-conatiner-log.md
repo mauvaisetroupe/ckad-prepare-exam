@@ -12,3 +12,5 @@ kubectl logs my-busybox-pod -f
 ```
 kubectl logs my-pod -c my-container-in-podm
 ```
+
+[next](./05-debugging-in-kubernetes.md)

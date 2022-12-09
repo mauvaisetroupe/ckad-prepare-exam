@@ -7,3 +7,5 @@
 ```
 kubectl logs my-pod -c my-init-container
 ```
+
+[next](../04-application-environment-configuration-and-security/01-discover-and-use-resources-that-extend-ubernetes-CRD.md)

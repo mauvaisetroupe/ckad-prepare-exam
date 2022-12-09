@@ -63,6 +63,6 @@ First, install kubctl convert plugin (use documentation)
 $ <b>kubectl convert -f ingress-old.yaml --output-version networking.k8s.io/v1 > ingress-new.yaml</b>
 </pre>
 
-
+[next](./02-implement-probe-health-check.md)
 
 

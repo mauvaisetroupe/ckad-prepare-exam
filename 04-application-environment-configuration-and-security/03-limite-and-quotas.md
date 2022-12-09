@@ -44,3 +44,5 @@ $ kubernetes get pods -o wide
 NAME       READY   STATUS    RESTARTS   AGE   IP           NODE           NOMINATED NODE   READINESS GATES
 nginx      1/1     Running   0          54s   10.42.0.11   controlplane   <none>           <none>
 ```
+
+[next](./04-understand-configmaps.md)

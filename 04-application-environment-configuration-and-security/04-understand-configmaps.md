@@ -57,3 +57,5 @@ spec:
         - confiMapRef:
             name: app-config              
 </pre>
+
+[next](./05-create-consume-secrets.md)
