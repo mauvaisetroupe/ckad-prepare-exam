@@ -35,7 +35,7 @@
  - [x] Ingress Networking – 2
 
 06 - State Persistence 2 Topics
- - [ ] Persistent Volumes
+ - [x] Persistent Volumes
  - [ ] Storage Class
 
 07 - Updates for Sep 2021 Changes 11 Topics
