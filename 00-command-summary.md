@@ -62,7 +62,7 @@ $ kubernetes label nodes node01 color=blue
 ```
 $ kubectl create role developer-role --verb=create,get,list --resource=pods
 $ kubectl create rolebinding developer-role-binding --role=developer-role --serviceaccount=default:my-service-account
-$ $ kubectl create clusterrole storage-admin --resource=persistentvolumes,storageclasses --verb=* -o yaml
+$ kubectl create clusterrole storage-admin --resource=persistentvolumes,storageclasses --verb=* -o yaml
 $ kubectl create clusterrolebinding storage-admin-binding --clusterrole=storage-admin --user=michelle -o yaml   
 ```
 
@@ -137,6 +137,8 @@ kubectl create ingress test-ingress -n critical-space \
 ## NetworkingPolicy
 
 ## Toleration
+
+## PersistentVolume and PersistentVolumeClaim
 
 ---
 
