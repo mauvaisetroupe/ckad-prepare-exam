@@ -22,7 +22,7 @@ nginx        ClusterIP   <b>10.105.25.61</b>   <none>        80/TCP    10m
 **Use wget to hit the pod via it's clusterIP**
 
 <pre>
-$ kubectl run busybox --image=busybox --rm -it <b>--restart=Never</b> -- wget -O- <b>10.105.25.61:80</b>
+$ kubectl run busybox --image=busybox --rm -it <b>--restart=Never</b> -- sh wget -O- <b>10.105.25.61:80</b>
 </pre>
 
 ## Expose a POD via a ClusterIP service
@@ -31,6 +31,42 @@ $ kubectl run busybox --image=busybox --rm -it <b>--restart=Never</b> -- wget -O
 ```
 $ kubectl expose pod redis <b>--name=redis-service</b> --port=6379
 ```
+
+[//]: # (source 05 / Ingress Networking – 1)
+```
+kubectl expose pod nginx --type=ClusterIP --port=80 --target-port=80 --name=nginx-service
+```
+
+
+## Expose a Deployment via a NodePort service
+[//]: # (source 05 / Ingress Networking – 1)
+
+```
+kubectl expose deployment ingress-controller --type=NodePort --port=80 --name=ingress --dry-run=client -o yaml > ingress.yaml 
+```
+>**Warning** 
+>
+> Option '-nodePort' doesn't exist, need to generate yaml file and add 'nodePort: 30080' inside
+> Option '- namespace my-namespace' is ignored 
+
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: ingress-space
+  name: ingress
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 30080
+  selector:
+    name: nginx-ingress
+  type: NodePort
+```                     
+
 
 ## Create a new service to access the web application 
 [//]: # (source 05 / Kubernetes Services)

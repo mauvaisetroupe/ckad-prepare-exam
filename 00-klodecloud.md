@@ -32,7 +32,7 @@
  - [x] Kubernetes Services
  - [x] Network Policies
  - [x] Ingress Networking – 1
- - [ ] Ingress Networking – 2
+ - [x] Ingress Networking – 2
 
 06 - State Persistence 2 Topics
  - [ ] Persistent Volumes
