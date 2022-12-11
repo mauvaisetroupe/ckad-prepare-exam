@@ -6,7 +6,7 @@
 ```
 kubectl create secret tls my-server-tls --cert=./my-server-tls.crt --key=./my-server-tls.key -n webhook-demo
 ```
-## create secrte for database password and URL
+## create secret for database password and URL
 [//]: # (source 02 / Secrets)
 
 <pre>
@@ -16,7 +16,7 @@ $ kubectl create secret <b>generic</b> db-secret
     --from-literal="DB_Password=password123"
 </pre>
 
-## use all keys from a secret in a pod
+## Use secret to inject env variables in POD
 
 ```
 $ kubectl explain pod.spec.containers.env.valueFrom
@@ -43,5 +43,78 @@ spec:
     - secretRef:
         name: db-secret
 </pre>
+
+## Comparison between ConfigMap and Secret
+
+<pre>
+  env:
+    - name: SECRET_USERNAME
+      valueFrom:
+        configMapKeyRef / <b>secretKeyRef</b>:
+          name: my-name
+          key: my-key
+</pre>
+
+<pre>
+  envFrom:
+    - configMapRef / <b>secretRef</b>:
+        name: my-name 
+</pre>
+
+
+>**Warning**
+>
+> For volumes, 'name' attribute for configMap, but 'secretName' for Secret 
+> 
+
+<pre>
+  volumes:
+    - name: config-volume
+      configMap / <b>secret</b>:
+        name / <b>secretName</b>: my-name
+</pre>
+
+## Create secret with a file content as value and file name as key (useful to be mounted as volume)
+
+```
+$ kubectl create secret generic my-secret-from-file --from-file ./my-config.propertie
+```
+
+```
+$ kubectl describe secrets my-secret-from-file
+
+Data
+====
+my-config.propertie:  24 bytes
+```
+
+```
+$ kubectl exec pod-with-configmap -it -- /bin/bash
+root@pod-with-configmap:/# ls -l
+drwxrwxrwt   3 root root  120 Dec 11 08:12 my-secret-from-env-file
+drwxrwxrwt   3 root root  100 Dec 11 08:12 my-secret-from-file
+drwxrwxrwt   3 root root  120 Dec 11 08:12 my-secret-from-litteral
+```
+
+```
+root@pod-with-configmap:/# more my-secret-from-file/my-config.propertie 
+key3=value3
+key4=value4
+```
+
+```
+root@pod-with-configmap:/# more my-secret-from-litteral/key1
+value1
+```
+
+```
+root@pod-with-configmap:/# more my-secret-from-env-file/key3
+value3
+```
+
+
+
+
+
 
 [next](./06-understand-serviceaccounts.md)
