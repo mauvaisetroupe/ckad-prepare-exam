@@ -1,12 +1,32 @@
 # Application Design and Build - Define, build and modify container images
 
-[Pods](#list-and-create-pod-with-specific-label)
+[Pods](#create-a-pod-with-busybox-and-run-a-command)
 
 [Docker](#docker-image)
 
 [Entrypoint and command](#entrypoint-and-command)
 
----
+## Create a POD and run a COMMAND
+
+```
+kubectl run time-check --image=busybox  --command -- /bin/sh -c "while true; do date; sleep $TIME_FREQ;done"
+```
+
+>**Warming**
+>
+>do not forget "--command"
+>
+
+```
+$ kubectl run -h
+
+  # Start the nginx pod using the default command, but use custom arguments (arg1 .. argN) for that command
+  kubectl run nginx --image=nginx -- <arg1> <arg2> ... <argN>
+  
+  # Start the nginx pod using a different command and custom arguments<br>
+  kubectl run nginx --image=nginx --command -- <cmd> <arg1> ... <argN>
+```
+
 ## List and Create pod, with specific label
 [//]: # (source 01 / PODS)
 ```
