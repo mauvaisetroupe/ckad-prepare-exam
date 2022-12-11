@@ -77,6 +77,51 @@ spec:
 ## Create secret with a file content as value and file name as key (useful to be mounted as volume)
 
 ```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-configmap
+spec:
+  containers:
+  - image: nginx
+    name: pod-with-configmap
+    resources: {}
+    volumeMounts:
+      - mountPath: /my-config-from-litteral
+        name: my-config-from-litteral-volume
+      - mountPath: /my-config-from-file
+        name: my-config-from-file-volume
+      - mountPath: /my-config-from-env-file
+        name: my-config-from-env-file-volume
+      - mountPath: /my-secret-from-litteral
+        name: my-secret-from-litteral-volume
+      - mountPath: /my-secret-from-file
+        name: my-secret-from-file-volume
+      - mountPath: /my-secret-from-env-file
+        name: my-secret-from-env-file-volume
+  volumes:
+  - name: my-config-from-litteral-volume
+    configMap:
+      name: my-config-from-litteral
+  - name: my-config-from-file-volume
+    configMap:
+      name: my-config-from-file
+  - name: my-config-from-env-file-volume
+    configMap:
+      name: my-config-from-env-file
+  - name: my-secret-from-litteral-volume
+    secret:
+      secretName: my-secret-from-litteral
+  - name: my-secret-from-file-volume
+    secret:
+      secretName: my-secret-from-file
+  - name: my-secret-from-env-file-volume
+    secret:
+      secretName: my-secret-from-env-file
+```
+
+
+```
 $ kubectl create secret generic my-secret-from-file --from-file ./my-config.propertie
 ```
 
