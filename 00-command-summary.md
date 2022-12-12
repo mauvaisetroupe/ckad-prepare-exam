@@ -3,7 +3,7 @@
 ---
 ## Pod
 
-### ![yaml](./images/shell.resized.png) Imperative
+### ![yaml](./images/cli.resized.jpg) Imperative
 
 ```
 $ kubectl run nginx --image=nginx --labels="app=myapp" 
