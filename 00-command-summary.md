@@ -1,6 +1,5 @@
 # Create resources with imperative command
 
----
 ## Pod
 
 ### <img src="./images/cli.resized.jpg"  height="15"> Imperative
@@ -20,8 +19,9 @@ $ kubectl run mypod --image=busybox --command -- /bin/sh -c "while true; do date
 - env, envFrom (env possible via command line)
 - secutityContext
 
----
 ## Deployment
+
+### <img src="./images/cli.resized.jpg"  height="15"> Imperative
 
 ```
 $ kubectl create deployment httpd-frontend --image=httpd:2.4-alpine --replicas=3 --port=6379 
@@ -29,9 +29,9 @@ $ kubectl create deployment httpd-frontend --image=httpd:2.4-alpine --replicas=3
 ### <img src="./images/yaml.resized.png"  height="15"> Editing yaml
 Idem pod (deployment.spec.template.spec sescru=ibe a Pod specification)
 
----
-
 ## configMap and Secret
+
+### <img src="./images/cli.resized.jpg"  height="15"> Imperative
 
 ```
 $ kubectl create configmap webapp-config-map \
@@ -52,10 +52,9 @@ $ kubectl create secret generic db-secret
     --from-literal="DB_Password=password123"
 ```
 
----
-
-
 ## Job
+
+### <img src="./images/cli.resized.jpg"  height="15"> Imperative
 
 ```
 $ kubectl create job throw-dice-job --image=throw-dice
@@ -69,6 +68,8 @@ $ kubectl create job hello --image=busybox:1.28 -- echo "Hello World"
 
 ## Cronjob
 
+### <img src="./images/cli.resized.jpg"  height="15"> Imperative
+
 ```
 $ kubectl create cronjob throw-dice-cron-job --image=throw-dice --schedule="30 21 * * * "
 ```
@@ -77,10 +78,9 @@ $ kubectl create cronjob throw-dice-cron-job --image=throw-dice --schedule="30 2
 
 Idem Job (cronjob.spec.jobTemplate.spec describe a job specification)
 
-
-
-
 ## Taint & toleration
+
+### <img src="./images/cli.resized.jpg"  height="15"> Imperative
 
 ```
 $ kubectl taint node node01 spray=frontend:NoSchedule
@@ -91,6 +91,8 @@ Toleration, cf above PODs
 
 ## Label
 
+### <img src="./images/cli.resized.jpg"  height="15"> Imperative
+
 ```
 $ kubernetes label nodes node01 color=blue
 ```
@@ -100,6 +102,8 @@ $ kubernetes label nodes node01 color=blue
 
 
 ## Role and RoleBinding, clusterrole and ClusterRoleBinding
+
+### <img src="./images/cli.resized.jpg"  height="15"> Imperative
 
 ```
 $ kubectl create role developer-role --verb=create,get,list --resource=pods
@@ -114,6 +118,8 @@ $ kubectl create clusterrolebinding storage-admin-binding --clusterrole=storage-
 
 ### Expose a pod 
 
+### <img src="./images/cli.resized.jpg"  height="15"> Imperative
+
 ```
 $ kubectl run nginx --image=nginx --port=80 --expose
 ```
@@ -123,6 +129,8 @@ kubectl expose pod nginx --type=ClusterIP --port=80 --target-port=80 --name=ngin
 ```
 
 ### Expose a Deployment via a NodePort service
+
+### <img src="./images/cli.resized.jpg"  height="15"> Imperative
 
 ```
 kubectl expose deployment ingress-controller --type=NodePort --port=80 --name=ingress --dry-run=client -o yaml > ingress.yaml 
@@ -136,6 +144,8 @@ kubectl expose deployment ingress-controller --type=NodePort --port=80 --name=in
 
 ## ServiceAccount
 
+### <img src="./images/cli.resized.jpg"  height="15"> Imperative
+
 ```
 $ kubectl create serviceaccount dashboard-sa
 $ kubectl create token dashboard-sa
@@ -143,13 +153,14 @@ $ kubectl create token dashboard-sa
 
 ## Ingress
 
+### <img src="./images/cli.resized.jpg"  height="15"> Imperative
+
+```
 kubectl create ingress test-ingress -n critical-space \
     --rule="/pay*=pay-service:8282" \
     --annotation="nginx.ingress.kubernetes.io/rewrite-target=/" \
     --annotation="nginx.ingress.kubernetes.io/ssl-redirect=fasle"
-
-
-
+```
 
 ---
 
