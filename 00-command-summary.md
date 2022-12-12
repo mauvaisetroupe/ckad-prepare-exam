@@ -3,6 +3,8 @@
 ---
 ## Pod
 
+### ![yaml](./images/shell.resized.png) Imperative
+
 ```
 $ kubectl run nginx --image=nginx --labels="app=myapp" 
 $ kubectl run mypod --image=busybox --command -- /bin/sh -c "while true; do date; sleep $TIME_FREQ;done"
