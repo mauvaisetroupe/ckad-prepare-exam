@@ -1,70 +1,33 @@
 # Create resources with imperative command
 
+---
 ## Pod
 
 ```
-$ kubectl run nginx --image=nginx --labels="app=myapp"
+$ kubectl run nginx --image=nginx --labels="app=myapp" 
+$ kubectl run mypod --image=busybox --command -- /bin/sh -c "while true; do date; sleep $TIME_FREQ;done"
 ```
 
-### Editing yaml
-- multi-container
-- initContainer
-- livenessProbe
-- readinessProbe
+### ![yaml](./images/yaml.resized.png) Editing yaml
+- multi-container and initContainer
+- livenessProbe and readinessProbe
 - resources limits and requests
+- volumeMounts and volumes
+- configMap and secret
+- tolerations (cf. Taint below)
+- env, envFrom (env possible via command line)
+- secutityContext
 
-## Job
-
-```
-$ kubectl create job throw-dice-job --image=throw-dice
-$ kubectl create job hello --image=busybox:1.28 -- echo "Hello World"
-```
-
-### Editing yaml
- - backoffLimit: 50
- - completions: 3
- - parallelism: 3
-
-## Cronjob
-
-```
-$ kubectl create cronjob throw-dice-cron-job --image=throw-dice --schedule="30 21 * * * "
-```
-
+---
 ## Deployment
 
 ```
-$ kubectl create deployment httpd-frontend --image=httpd:2.4-alpine --replicas=3
+$ kubectl create deployment httpd-frontend --image=httpd:2.4-alpine --replicas=3 --port=6379 
 ```
+### ![yaml](./images/yaml.resized.png) Editing yaml
+Idem pod (deployment.spec.template.spec sescru=ibe a Pod specification)
 
-## Taint & toleration
-
-```
-$ kubectl taint node node01 spray=frontend:NoSchedule
-$ kubectl taint node node01 spray=frontend:NoSchedule- #remove
-```
-
-### Editing yaml
-- Toleration on pod
-
-## Label
-
-```
-$ kubernetes label nodes node01 color=blue
-```
-
-### Editing yaml
-- affinity on deployment
-
-
-## Role and RoleBinding, clusterrole and ClusterRoleBinding
-
-```
-$ kubectl create role developer-role --verb=create,get,list --resource=pods
-$ kubectl create rolebinding developer-role-binding --role=developer-role --serviceaccount=default:my-service-account
-$ kubectl create clusterrole storage-admin --resource=persistentvolumes,storageclasses --verb=* -o yaml
-$ kubectl create clusterrolebinding storage-admin-binding --clusterrole=storage-admin --user=michelle -o yaml   
-```
+---
 
 ## configMap and Secret
 
@@ -86,6 +49,64 @@ $ kubectl create secret generic db-secret
     --from-literal="DB_User=root" 
     --from-literal="DB_Password=password123"
 ```
+
+---
+
+
+## Job
+
+```
+$ kubectl create job throw-dice-job --image=throw-dice
+$ kubectl create job hello --image=busybox:1.28 -- echo "Hello World"
+```
+
+### ![yaml](./images/yaml.resized.png) Editing yaml
+ - backoffLimit: 50
+ - completions: 3
+ - parallelism: 3
+
+## Cronjob
+
+```
+$ kubectl create cronjob throw-dice-cron-job --image=throw-dice --schedule="30 21 * * * "
+```
+
+### ![yaml](./images/yaml.resized.png) Editing yaml
+
+Idem Job (cronjob.spec.jobTemplate.spec describe a job specification)
+
+
+
+
+## Taint & toleration
+
+```
+$ kubectl taint node node01 spray=frontend:NoSchedule
+$ kubectl taint node node01 spray=frontend:NoSchedule- #remove
+```
+
+Toleration, cf above PODs 
+
+## Label
+
+```
+$ kubernetes label nodes node01 color=blue
+```
+
+### ![yaml](./images/yaml.resized.png) Editing yaml
+- affinity on deployment
+
+
+## Role and RoleBinding, clusterrole and ClusterRoleBinding
+
+```
+$ kubectl create role developer-role --verb=create,get,list --resource=pods
+$ kubectl create rolebinding developer-role-binding --role=developer-role --serviceaccount=default:my-service-account
+$ kubectl create clusterrole storage-admin --resource=persistentvolumes,storageclasses --verb=* -o yaml
+$ kubectl create clusterrolebinding storage-admin-binding --clusterrole=storage-admin --user=michelle -o yaml   
+```
+
+
 
 ## Service
 
@@ -207,3 +228,83 @@ $ kubectl exec ubuntu-sleeper -- whoami
 ```
 $ kubectl run busybox --image=busybox --rm -it --restart=Never -- wget -O- 10.105.25.61:80
 ```
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: redis
+  name: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      volumes:
+      - name: data
+        emptyDir: {}
+      - name: redis-config
+        configMap:
+          name: redis-config
+      containers:
+      - image: redis:alpine
+        name: redis
+        volumeMounts:
+        - mountPath: /redis-master-data
+          name: data
+        - mountPath: /redis-master
+          name: redis-config
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            cpu: "0.2"
+
+
+apiVersion: apps/v2
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: redis
+  name: redis
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: redis
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: redis
+    spec:
+      containers:
+      - image: redis:alpine
+        name: redis
+        resources:
+          requests:
+            cpu: .2
+        volumeMounts:
+          - mountPath: /redis-master-data
+            name: data
+          - mountPath: /redis-master
+            name: redis-config
+      volumes:
+        - name: data
+          emptyDir: {}
+        - name: redis-config
+          configMap:
+            name: redis-config            
+
+
+
+
+ k exec pod-with-configmap -it -- /bin/bash
+pour ouvrir un bash
