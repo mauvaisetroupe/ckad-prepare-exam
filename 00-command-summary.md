@@ -3,14 +3,14 @@
 ---
 ## Pod
 
-### ![yaml](./images/cli.resized.jpg) Imperative
+### <img src="./images/cli.resized.jpg"  height="15"> Imperative
 
 ```
 $ kubectl run nginx --image=nginx --labels="app=myapp" 
 $ kubectl run mypod --image=busybox --command -- /bin/sh -c "while true; do date; sleep $TIME_FREQ;done"
 ```
 
-### ![yaml](./images/yaml.resized.png) Editing yaml
+### <img src="./images/yaml.resized.png"  height="15"> Editing yaml
 - multi-container and initContainer
 - livenessProbe and readinessProbe
 - resources limits and requests
@@ -26,7 +26,7 @@ $ kubectl run mypod --image=busybox --command -- /bin/sh -c "while true; do date
 ```
 $ kubectl create deployment httpd-frontend --image=httpd:2.4-alpine --replicas=3 --port=6379 
 ```
-### ![yaml](./images/yaml.resized.png) Editing yaml
+### <img src="./images/yaml.resized.png"  height="15"> Editing yaml
 Idem pod (deployment.spec.template.spec sescru=ibe a Pod specification)
 
 ---
@@ -62,7 +62,7 @@ $ kubectl create job throw-dice-job --image=throw-dice
 $ kubectl create job hello --image=busybox:1.28 -- echo "Hello World"
 ```
 
-### ![yaml](./images/yaml.resized.png) Editing yaml
+### <img src="./images/yaml.resized.png"  height="15"> Editing yaml
  - backoffLimit: 50
  - completions: 3
  - parallelism: 3
@@ -73,7 +73,7 @@ $ kubectl create job hello --image=busybox:1.28 -- echo "Hello World"
 $ kubectl create cronjob throw-dice-cron-job --image=throw-dice --schedule="30 21 * * * "
 ```
 
-### ![yaml](./images/yaml.resized.png) Editing yaml
+### <img src="./images/yaml.resized.png"  height="15"> Editing yaml
 
 Idem Job (cronjob.spec.jobTemplate.spec describe a job specification)
 
@@ -95,7 +95,7 @@ Toleration, cf above PODs
 $ kubernetes label nodes node01 color=blue
 ```
 
-### ![yaml](./images/yaml.resized.png) Editing yaml
+### <img src="./images/yaml.resized.png"  height="15"> Editing yaml
 - affinity on deployment
 
 
