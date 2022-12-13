@@ -21,8 +21,15 @@ nginx        ClusterIP   <b>10.105.25.61</b>   <none>        80/TCP    10m
 
 **Use wget to hit the pod via it's clusterIP**
 
+With prompt:
 <pre>
-$ kubectl run busybox --image=busybox --rm -it <b>--restart=Never</b> -- sh wget -O- <b>10.105.25.61:80</b>
+$ kubectl run busybox --image=busybox --rm -it <b>--restart=Never</b> -- sh 
+/ # wget -O- <b>10.105.25.61:80</b>
+</pre>
+
+Inline:
+<pre>
+$ kubectl run busybox --image=busybox --rm -it <b>--restart=Never</b> -- wget -O- <b>10.105.25.61:80</b>
 </pre>
 
 ## Expose a POD via a ClusterIP service
