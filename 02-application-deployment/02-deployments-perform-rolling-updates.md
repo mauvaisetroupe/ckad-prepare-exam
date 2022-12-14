@@ -2,9 +2,9 @@
 
 [Create a deployment](#create-a-new-deployment)
 
-[Taint and toleration](#taint-and-toleration)
-
 [Label and node selector](#label-and-node-selector)
+
+[Taint and toleration](#taint-and-toleration)
 
 [Rollout](#how-many-pods-could-be-stop-during-a-rollingupdate)
 
@@ -33,18 +33,80 @@ spec:
    replicas: 2
    selector:
       matchLabels:
-        <b>tier: front-end</b>
+        <b>tier: front-end <-- selector does not match template labels </b>
    template:
      metadata:
        labels:
-        <b>tier: nginx</b>
+        <b>tier: nginx  <-- selector does not match template labels</b>
      spec:
        containers:
        - name: nginx
          image: nginx
 </pre>
 
-**`selector` does not match template `labels`**
+---
+
+## Label and node selector
+
+
+### Method-1, use nodeName
+
+<pre>
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  <b>nodeName: kube-01</b>
+ </pre>
+
+### Method-2, use nodeSelector
+
+#### Apply a label disktype=ssd to node node01
+
+```
+$ kubernetes label nodes node01 disktype=ssd
+```
+
+#### Use nodeSelector in POD yaml
+
+<pre>
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  <b>nodeSelector:
+    disktype: ssd</b>
+</pre>
+
+
+### Method-2, use nodeAffinity (only for complex requests)
+
+<pre>
+$ kuberetes create deploy blue --image=nginx --replicas=3
+
+$ kuberetes edit deploy blue
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  template:
+    spec:
+      <b>affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: color
+                operator: NotIn
+                values:
+                - red
+                - blue</b>
+</pre>
+
 
 ---
 ## Taint and toleration
@@ -102,37 +164,6 @@ spec:
         value: frontend</b>
 </pre>
 
----
-## Label and node selector
-
-### Apply a label color=blue to node node01
-
-```
-$ kubernetes label nodes node01 color=blue
-```
-
-### Create a new deployment named blue with the nginx image and 3 replicas, with node affinitty to node 1
-
-<pre>
-$ kuberetes create deploy blue --image=nginx --replicas=3
-
-$ kuberetes edit deploy blue
-apiVersion: apps/v1
-kind: Deployment
-spec:
-  template:
-    spec:
-      <b>affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: color
-                operator: In
-                values:
-                - blue</b>
-
-</pre>
 
 ---
 
