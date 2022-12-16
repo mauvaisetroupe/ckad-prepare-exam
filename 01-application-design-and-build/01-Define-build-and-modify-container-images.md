@@ -12,7 +12,7 @@
 kubectl run time-check --image=busybox  --command -- /bin/sh -c "while true; do date; sleep $TIME_FREQ;done"
 ```
 
->**Warming**
+>**Warning**
 >
 >do not forget "--command"
 >
