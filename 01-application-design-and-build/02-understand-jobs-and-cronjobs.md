@@ -34,7 +34,7 @@ throw-dice-job-r6jxz   0/1     Error       0          68s
 throw-dice-job-rq8zw   0/1     Completed   0          115s
 ```
 
-## change completions, backoffLimit and parallelism
+## change completions, backoffLimit, parallelism and activeDeadlineSeconds
 
 <pre>
 $ <b>kubectl create job throw-dice-job --image=throw-dice --dry-run=client -o yaml</b>
@@ -50,7 +50,8 @@ spec:
       restartPolicy: Never
   <b>backoffLimit: 50
   completions: 3
-  parallelism: 3</b>
+  parallelism: 3
+  activeDeadlineSeconds: 20</b>
 </pre>
 
 ## How many attempts did it take to complete the job this time?
