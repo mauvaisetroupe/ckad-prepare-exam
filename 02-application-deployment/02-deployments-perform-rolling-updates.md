@@ -44,6 +44,18 @@ spec:
          image: nginx
 </pre>
 
+### Scale a deployment
+
+```
+kubectl scale deploy nginx --replicas=5
+```
+
+### Autoscale
+
+```
+kubectl autoscale deploy nginx --min=5 --max=10 --cpu-percent=80
+```
+
 ---
 
 ## Label and node selector
