@@ -14,7 +14,7 @@
 - [Understand API deprecations](./03-application-observability-and-maintenance/01-understand-API-deprecations.md)
 - [Implement probes and health checks](./03-application-observability-and-maintenance/02-implement-probe-health-check.md)
 - [Use provided tools to monitor Kubernetes applications](./03-application-observability-and-maintenance/03-use-provided-tools-to-monitor.md)
-- [Utilize container logs](./03-application-observability-and-maintenance/04-utilize-conatiner-log.md)
+- [Utilize container logs](./03-application-observability-and-maintenance/04-utilize-container-log.md)
 - [Debugging in Kubernetes](./03-application-observability-and-maintenance/05-debugging-in-kubernetes.md)
 
 ## 04 - Application Environment, Configuration and Security - 25%
