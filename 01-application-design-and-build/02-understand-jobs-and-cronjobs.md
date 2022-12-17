@@ -10,9 +10,17 @@ $ kuberneted create job throw-dice-job --image=throw-dice
 
 ## create a Job which prints "Hello World"
 
+>**Warning**
+>
+>When command includes a sleep, job creation is waiting and of sleep
+>
+>Prefer /bin/sh -c
+
 ```
-kubectl create job hello --image=busybox:1.28 -- echo "Hello World"
+kubectl create job busybox --image busybox -- echo hello;sleep 30;echo world
+kubectl create job busybox --image busybox -- /bin/sh -c "echo hello;sleep 30;echo world"
 ```
+
 
 ## List jobs and associated Pods
 
