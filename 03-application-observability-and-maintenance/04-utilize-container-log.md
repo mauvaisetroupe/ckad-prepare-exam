@@ -13,6 +13,12 @@ kubectl logs my-busybox-pod -f
 kubectl logs my-pod -c my-container-in-podm
 ```
 
+## Check logs of a Job
+
+```
+$ kubernetes logs jobs/my-job
+```
+
 
 ## The application stores logs at location /log/app.log. View the logs.
 [//]: # (source 06 / Persistent Volume)
