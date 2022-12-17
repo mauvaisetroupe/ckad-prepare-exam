@@ -243,6 +243,14 @@ $ kubectl run busybox --image=busybox --rm -it --restart=Never -- wget -O- 10.10
 ```
 
 
+```
+kubectl scale deploy nginx --replicas=5
+```
+
+```
+kubectl autoscale deploy nginx --min=5 --max=10 --cpu-percent=80
+```
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
