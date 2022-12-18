@@ -157,7 +157,12 @@ root@pod-with-configmap:/# more my-secret-from-env-file/key3
 value3
 ```
 
+## Get the value of mysecret
 
+```
+kubectl get secret mysecret -o yaml
+echo -n YWXeaW4= | base64 -d 
+```
 
 
 
