@@ -4,6 +4,17 @@
 ## Liveness and readiness probes in pod yaml
 [//]: # (source 03 / Readiness Probes)
 
+
+>**Warning**
+>
+> host is not mandatory
+
+```
+   host	<string>
+     Host name to connect to, defaults to the pod IP. You probably want to set
+     "Host" in httpHeaders instead.
+```
+
 ```
 apiVersion: v1
 kind: Pod
