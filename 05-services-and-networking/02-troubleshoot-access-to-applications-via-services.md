@@ -13,11 +13,19 @@ $ kubectl run nginx --image=nginx --port=80 <b>--expose</b>
 
 **A ClusterIP has been automatically created**
 
+Check Cluster IP
 <pre>
 $ kubectl get svc
 NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 nginx        ClusterIP   <b>10.105.25.61</b>   <none>        80/TCP    10m
 </pre>
+
+Check Endpoints
+```
+$ kubectl get endpoints
+NAME         ENDPOINTS           AGE
+nginx        172.17.0.3:80       25s
+```
 
 **Use wget to hit the pod via it's clusterIP**
 
