@@ -58,4 +58,31 @@ spec:
           port: 5978
 ```
 
+## combine pod and namespace selector
+
+### namespaceSelector AND podSelector (intersection)
+```
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          user: alice
+      podSelector:
+        matchLabels:
+          role: client
+```
+
+### namespaceSelector OR podSelector (union)
+```
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          user: alice
+    - podSelector:
+        matchLabels:
+          role: client
+```
+
+
 [next](./02-troubleshoot-access-to-applications-via-services.md)
