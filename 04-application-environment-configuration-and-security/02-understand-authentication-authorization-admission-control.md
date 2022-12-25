@@ -1,5 +1,257 @@
 # Application Environment, Configuration and Security - Understand authentication, authorization and admission control
 
+[Create a user](#create-a-user)
+
+[Create role and bind role](#create-or-modify-a-role-and-rolebinding)
+
+[Create and change context](#create-and-change-context)
+
+[Authorization mode](#identify-authorization-modes)
+
+[Create CluserRole and ClusterBindings](#create-clusterrole-and-clusterrolebinding)
+
+[Admission Contollers](#find-default-admission-controllers-enable-and-disable-some)
+
+---
+## Create a user 
+
+### Generate a private key (.key) - not part of CKAD
+```
+openssl genrsa -out user1.key 2048
+```
+
+### Generate a Client Sign Request (.csr)  - not part of CKAD
+CSR is a request to a certificate authority (CA) in order to obtain a certificate
+```
+openssl req -new -key user1.key -out user1.csr -subj “/CN=user1/O=group1”
+```
+A certificate is the combination of a public key and identity of key issuer:
+ - Common Name (CN)
+ - Organization (O)
+
+### Generate the certificate (.crt) - not part of CKAD
+```
+openssl x509 -req -in user1.csr -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key -CAcreateserial -out user1.crt -days 100
+```
+
+### create user in default kubeconfig file () or in a different file
+
+```
+kubectl config set-credentials user1 --client-certificate=user1.crt --client-key=user1.key 
+```
+
+Can use following option to generate user in a specific file
+```
+--kubeconfig=config-demo 
+```
+
+
+```
+more ~/.kube/config 
+apiVersion: v1
+clusters:
+...
+contexts:
+...
+current-context: minikube
+kind: Config
+preferences: {}
+users:
+- name: minikube
+  user:
+    client-certificate: /home/lionel/.minikube/profiles/minikube/client.crt
+    client-key: /home/lionel/.minikube/profiles/minikube/client.key
+- name: user1
+  user:
+    client-certificate: /media/data/development/CKAD/users/cert/user1.crt
+    client-key: /media/data/development/CKAD/users/cert/user1.key
+```
+
+
+---
+
+## Create or Modify a role and roleBinding
+
+### Create a role with access to create, get and list pods
+[//]: # (source 07/Practice Test Role Based Access Controls)
+
+```
+$ kubectl create role developer-role --verb=create,get,list --resource=pods
+```
+
+### Find resources to which a role give access
+<pre>
+$ <b>kubectl get roles -A</b>
+NAME             CREATED AT
+developer-role   2022-12-25T08:13:15Z
+
+$ <b>kubectl describe role developer-role</b>
+Name:         developer-role
+PolicyRule:
+  Resources  Non-Resource URLs  Resource Names  Verbs
+  ---------  -----------------  --------------  -----
+  pods       []                 []              [create get list]
+</pre>
+
+
+### Bind the role to a user (or serviceAccount) and check operation is allowed
+
+
+```
+$ kubectl create rolebinding developer-role-binding --role developer-role --user user1
+```
+
+<pre>
+$ <b>kubectl get rolebindings -A</b>
+NAME                     ROLE                  AGE
+developer-role-binding   Role/developer-role   2m45s
+
+$ <b>kubectl describe rolebindings developer-role-binding</b>
+Name:         developer-role-binding
+Role:
+  Name:  developer-role
+Subjects:
+  Kind            Name                Namespace
+  ----            ----                ---------
+  ServiceAccount  my-service-account  default
+</pre>
+
+<pre>
+$ <b>kubectl get pods --as user-does-not-exist</b>
+Error from server (Forbidden): pods is forbidden: User "user1" cannot list resource "pods" ...
+$ <b>kubectl get pods --as user1</b>
+NAME                     READY   STATUS    RESTARTS      AGE
+nginx-75d9bb457d-9jr4t   1/1     Running   1 (24h ago)   5d11h
+</pre>
+
+
+
+Can also bind to a service account
+<pre>
+$ <b>kubectl create rolebinding developer-role-binding --role=developer-role --serviceaccount=default:my-service-account</b>
+</pre>
+
+
+
+### Add authorization to create Deployment to existing Role
+[//]: # (source 07/Practice Test Role Based Access Controls)
+
+
+> **Warning**
+> 
+> Need to edit apiGroups. 
+> Use command kubectl api-resources to know apiGroups (below for deployment)
+
+<pre>
+$ <b>kubectl api-resources</b>
+NAME           SHORTNAMES   APIVERSION   NAMESPACED   KIND
+deployments    deploy       apps/v1      true         Deployment
+</pre>
+
+<pre>
+$ <b>kubectl edit role developer-role</b>
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: "2022-12-04T16:12:42Z"
+  name: developer-role
+  namespace: default
+  resourceVersion: "42405"
+  uid: 36c8f0dd-02b2-4d40-b272-35ade876ae2e
+rules:
+- <b>apiGroups:
+  - "apps"</b>
+  resources:
+  - deployments
+  verbs:
+  - list
+  - get
+  - create
+  - watch
+</pre>
+
+---
+
+## Create and change context
+[//]: # (source 07/Practice Test Role Based Access Controls)
+[//]: # (source 07/Practice Test KubeConfig)
+
+### View Config file with User, Clusters and Context (link between Clusters & Users)
+Default file is in ~/.kube/config
+
+<pre>
+$ <b>kubectl config view</b>
+apiVersion: v1
+kind: Config
+clusters:
+- cluster:
+    ...
+  name: minikube
+contexts:
+- context:
+    cluster: minikube
+    namespace: default
+    user: minikube
+  name: minikube
+current-context: minikube
+users:
+- name: minikube
+...
+- name: user1
+...
+</pre>
+
+### Create new Context for user1 on cluster minikube
+
+```
+kubectl config set-context user1-context --cluster=minikube --user=user1
+```
+
+<pre>
+$ k config view 
+apiVersion: v1
+clusters:
+- cluster:
+  name: minikube
+contexts:
+...
+<b>- context:
+    cluster: minikube
+    user: user1
+  name: user1-context
+current-context: minikube</b>
+kind: Config
+preferences: {}
+users:
+- name: minikube
+- name: user1
+</pre>
+
+### Switch to new create context
+
+```
+$ <b>kubectl config use-context user1-context</b>
+```
+
+<pre>
+kubectl config view 
+apiVersion: v1
+clusters:
+contexts:
+- context:
+- context:
+    cluster: minikube
+    user: user1
+  name: user1-context
+<b>current-context: user1-context</b>
+users:
+- name: minikube
+- name: user1
+</pre>
+
+
+---
+
 ## Identify authorization modes
 [//]: # (source 07/Practice Test Role Based Access Controls)
 
@@ -22,159 +274,9 @@ $ <b>kubectl get pods -n kube-system  kube-apiserver-minikube -o yaml</b>
     - <b>--authorization-mode=Node,RBAC</b>
 </pre>
 
-## Find resources to which a role give access
-[//]: # (source 07/Practice Test Role Based Access Controls)
-<pre>
-$ <b>kubectl get roles -A</b>
-$ <b>kubectl describe role -n kubernetes-dashboard kubernetes-dashboard</b>
-Name:         kubernetes-dashboard
-PolicyRule:
-  Resources       Non-Resource URLs  Resource Names                     Verbs
-  ---------       -----------------  --------------                     -----
-  secrets         []                 [kubernetes-dashboard-certs]       [get update delete]
-</pre>
+---
 
-## Find accounts binded to a role
-[//]: # (source 07/Practice Test Role Based Access Controls)
-<pre>
-$ <b>kubectl get rolebindings -A</b>
-NAMESPACE              NAME                           ROLE                             AGE
-kubernetes-dashboard   kubernetes-dashboard           Role/kubernetes-dashboard        15h
-
-
-$ <b>kubectl describe -n kubernetes-dashboard rolebindings kubernetes-dashboard</b>
-Name:         kubernetes-dashboard
-Role:
-  Name:  kubernetes-dashboard
-Subjects:
-  Kind            Name                  Namespace
-  ----            ----                  ---------
-  ServiceAccount  kubernetes-dashboard  kubernetes-dashboard
-</pre>
-
-## Inspect permission granted to a user, and change context
-[//]: # (source 07/Practice Test Role Based Access Controls)
-[//]: # (source 07/Practice Test KubeConfig)
-
-Default file is in ~/.kube/config
-
-<pre>
-$ <b>kubectl config view</b>
-apiVersion: v1
-kind: Config
-clusters:
-- cluster:
-    ...
-  name: minikube
-contexts:
-- context:
-    cluster: minikube
-    namespace: default
-    user: minikube
-  name: minikube
-current-context: minikube
-users:
-- name: minikube
-  user:
-    client-certificate: /home/lionel/.minikube/profiles/minikube/client.crt
-    client-key: /home/lionel/.minikube/profiles/minikube/client.key
-</pre>
-
-<pre>
-$ <b>kubectl config use-context minikube</b>
-</pre>
-
-## create a role with access to create, get and list pods, bind the role to a serviceAccount (or user) and check operation is allowed
-[//]: # (source 07/Practice Test Role Based Access Controls)
-<pre>
-$ <b>kubectl create role developer-role --verb=create,get,list --resource=pods</b>
-</pre>
-
-<pre>
-$ <b>kubectl create rolebinding developer-role-binding --role=developer-role --serviceaccount=default:my-service-account</b>
-$ <b>kubectl describe rolebindings developer-role-binding</b>
-Name:         developer-role-binding
-Role:
-  Name:  developer-role
-Subjects:
-  Kind            Name                Namespace
-  ----            ----                ---------
-  ServiceAccount  my-service-account  default
-</pre>
-
-<pre>
-$ <b>kubectl get pods --as user1</b>
-Error from server (Forbidden): pods is forbidden: User "user1" cannot list resource "pods" ...
-$ <b>kubectl get pods --as=system:serviceaccount:default:my-service-account</b>
-</pre>
-
-## Add authorization to create Deployment to existing Role
-[//]: # (source 07/Practice Test Role Based Access Controls)
-
-<pre>
-$ <b>kubectl edit role developer-role</b>
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  creationTimestamp: "2022-12-04T16:12:42Z"
-  name: developer-role
-  namespace: default
-  resourceVersion: "42405"
-  uid: 36c8f0dd-02b2-4d40-b272-35ade876ae2e
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - pods
-  verbs:
-  - list
-  - get
-  - create
-  - watch
-</pre>
-
-> **Warning**
-> 
-> Need to edit apiGroups. 
-> Use command kubectl api-resources
-
-<pre>
-$ <b>kubectl api-resources</b>
-NAME           SHORTNAMES   APIVERSION   NAMESPACED   KIND
-deployments    deploy       apps/v1      true         Deployment
-</pre>
-
-<pre>
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  creationTimestamp: "2022-12-04T16:12:42Z"
-  name: developer-role
-  namespace: default
-  resourceVersion: "42405"
-  uid: 36c8f0dd-02b2-4d40-b272-35ade876ae2e
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - pods
-  verbs:
-  - list
-  - get
-  - create
-  - watch
-- <b>apiGroups:
-  - "apps"</b>
-  resources:
-  - deployments
-  verbs:
-  - list
-  - get
-  - create
-  - watch
-</pre>
-
-## create clusterRole and clusterRoleBinding
+## Create clusterRole and clusterRoleBinding
 [//]: # (source 07/Practice Test Cluster Roles)
 
 Find resources that are cluster scoped (vs. namespace scoped)
@@ -221,6 +323,9 @@ subjects:
   kind: User
   name: michelle
 </pre>
+
+
+---
 
 ## Find default admission controllers, enable and disable some
 [//]: # (source 07/Labs – Admission Controllers)
