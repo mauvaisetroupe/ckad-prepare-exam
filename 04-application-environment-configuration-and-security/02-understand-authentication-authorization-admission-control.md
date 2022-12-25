@@ -95,13 +95,13 @@ PolicyRule:
 </pre>
 
 
-### Bind the role to a user (or serviceAccount) and check operation is allowed
+### Bind the role to a user and check operation is allowed
 
 #### Create rolebinding
 
-```
-$ kubectl create rolebinding developer-role-binding --role developer-role --user user1
-```
+<pre>
+$ <b>kubectl create rolebinding developer-role-binding --role developer-role --user user1</b>
+</pre>
 
 <pre>
 $ <b>kubectl get rolebindings -A</b>
@@ -137,7 +137,7 @@ deployments.apps                                []                  []          
 </pre>
 
 
-### Create rolebinding for serviceAccount
+#### Create rolebinding for serviceAccount
 
 Can also bind to a service account
 <pre>
@@ -146,7 +146,7 @@ $ kubectl create rolebinding developer-role-binding --role=developer-role <b>--s
 
 
 
-### Add authorization to create Deployment to existing Role
+### Edit existing Role
 [//]: # (source 07/Practice Test Role Based Access Controls)
 
 
