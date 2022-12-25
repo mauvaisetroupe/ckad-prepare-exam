@@ -35,7 +35,7 @@ openssl x509 -req -in user1.csr -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key
 -out user1.crt -days 100
 ```
 
-### create user in default kubeconfig file () or in a different file
+### Create user in default kubeconfig file (.kube/config) or in a different file
 
 ```
 kubectl config set-credentials user1 --client-certificate=user1.crt --client-key=user1.key 
@@ -47,7 +47,7 @@ Can use following option to generate user in a specific file
 ```
 
 
-```
+<pre>
 more ~/.kube/config 
 apiVersion: v1
 clusters:
@@ -62,11 +62,11 @@ users:
   user:
     client-certificate: /home/lionel/.minikube/profiles/minikube/client.crt
     client-key: /home/lionel/.minikube/profiles/minikube/client.key
-- name: user1
+<b>- name: user1
   user:
     client-certificate: /media/data/development/CKAD/users/cert/user1.crt
-    client-key: /media/data/development/CKAD/users/cert/user1.key
-```
+    client-key: /media/data/development/CKAD/users/cert/user1.key</b>
+</pre>
 
 
 ---
@@ -129,7 +129,7 @@ nginx-75d9bb457d-9jr4t   1/1     Running   1 (24h ago)   5d11h
 
 Can also bind to a service account
 <pre>
-$ <b>kubectl create rolebinding developer-role-binding --role=developer-role --serviceaccount=default:my-service-account</b>
+$ kubectl create rolebinding developer-role-binding --role=developer-role <b>--serviceaccount=default:my-service-account</b>
 </pre>
 
 
@@ -146,7 +146,7 @@ $ <b>kubectl create rolebinding developer-role-binding --role=developer-role --s
 <pre>
 $ <b>kubectl api-resources</b>
 NAME           SHORTNAMES   APIVERSION   NAMESPACED   KIND
-deployments    deploy       apps/v1      true         Deployment
+deployments    deploy       <b>apps/v1</b>      true         Deployment
 </pre>
 
 <pre>
@@ -219,8 +219,8 @@ contexts:
 <b>- context:
     cluster: minikube
     user: user1
-  name: user1-context
-current-context: minikube</b>
+  name: user1-context</b>
+current-context: minikube
 kind: Config
 preferences: {}
 users:
@@ -231,7 +231,7 @@ users:
 ### Switch to new create context
 
 ```
-$ <b>kubectl config use-context user1-context</b>
+$ kubectl config use-context user1-context
 ```
 
 <pre>
@@ -280,14 +280,17 @@ $ <b>kubectl get pods -n kube-system  kube-apiserver-minikube -o yaml</b>
 ## Create clusterRole and clusterRoleBinding
 [//]: # (source 07/Practice Test Cluster Roles)
 
-Find resources that are cluster scoped (vs. namespace scoped)
+### Find resources that are cluster scoped (vs. namespace scoped)
 
 <pre>
 $ <b>kubectl api-resources --namespaced=false</b>
 </pre>
 
+
+### Create ClusterRole
+
 <pre>
-$ <b>$ kubectl create clusterrole storage-admin --resource=persistentvolumes,storageclasses --verb=* -o yaml</b>
+$ <b>kubectl create clusterrole storage-admin --resource=persistentvolumes,storageclasses --verb=* -o yaml</b>
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -307,6 +310,8 @@ rules:
   verbs:
   - '*'
 </pre>
+
+### Create ClusterRoleBinding
 
 <pre>
 $ <b>kubectl create clusterrolebinding storage-admin-binding --clusterrole=storage-admin --user=michelle -o yaml</b>
