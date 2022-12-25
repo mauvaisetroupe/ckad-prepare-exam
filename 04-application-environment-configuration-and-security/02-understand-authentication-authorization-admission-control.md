@@ -31,7 +31,8 @@ A certificate is the combination of a public key and identity of key issuer:
 
 ### Generate the certificate (.crt) - not part of CKAD
 ```
-openssl x509 -req -in user1.csr -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key -CAcreateserial -out user1.crt -days 100
+openssl x509 -req -in user1.csr -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key -CAcreateserial 
+-out user1.crt -days 100
 ```
 
 ### create user in default kubeconfig file () or in a different file
