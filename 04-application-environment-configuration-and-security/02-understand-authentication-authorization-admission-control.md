@@ -97,6 +97,7 @@ PolicyRule:
 
 ### Bind the role to a user (or serviceAccount) and check operation is allowed
 
+#### Create rolebinding
 
 ```
 $ kubectl create rolebinding developer-role-binding --role developer-role --user user1
@@ -117,6 +118,8 @@ Subjects:
   ServiceAccount  my-service-account  default
 </pre>
 
+#### Check autorizations
+
 <pre>
 $ <b>kubectl get pods --as user-does-not-exist</b>
 Error from server (Forbidden): pods is forbidden: User "user1" cannot list resource "pods" ...
@@ -125,7 +128,16 @@ NAME                     READY   STATUS    RESTARTS      AGE
 nginx-75d9bb457d-9jr4t   1/1     Running   1 (24h ago)   5d11h
 </pre>
 
+<pre>
+$ <b>kubectl auth can-i --list --user user1</b>
+Resources                                       Non-Resource URLs   Resource Names   Verbs
+pods                                            []                  []               [*]
+...
+deployments.apps                                []                  []               [list create]
+</pre>
 
+
+### Create rolebinding for serviceAccount
 
 Can also bind to a service account
 <pre>
@@ -310,6 +322,33 @@ rules:
   verbs:
   - '*'
 </pre>
+
+
+k -n development create role developer-role --verb=* --resource deploy --resource pvc --resource pod  --dry-run=client -o yaml
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: null
+  name: developer-role
+  namespace: development
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumeclaims
+  - pods
+  verbs:
+  - '*'
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - '*'
+
+
+
 
 ### Create ClusterRoleBinding
 
