@@ -12,10 +12,11 @@
 kubectl run time-check --image=busybox  --command -- /bin/sh -c "while true; do date; sleep $TIME_FREQ;done"
 ```
 
->**Warning**
->
->do not forget "--command"
->
+>**Warning** : Do not forget "--command"
+
+<details><summary>More details</summary>
+<p>
+
 
 ```
 $ kubectl run -h
@@ -26,16 +27,20 @@ $ kubectl run -h
   # Start the nginx pod using a different command and custom arguments<br>
   kubectl run nginx --image=nginx --command -- <cmd> <arg1> ... <argN>
 ```
+</p>
+</details>
+<br/>
 
-## List and Create pod, with specific label
+## Create pod, with specific label
 [//]: # (source 01 / PODS)
 ```
-kubectl get pods -A
 kubectl run nginx --image=nginx --labels="app=myapp"
 ```
 
-## Get pods image, Node deployed, ...
+## List pods and get details
+
 ```
+kubectl get pods -A
 kubectl describe pod mypod-tbtb2
 ```
 
