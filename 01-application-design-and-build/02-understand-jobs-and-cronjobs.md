@@ -1,6 +1,6 @@
 # Application Design and Build - Understand Jobs and CronJobs
 
-## create job with image
+## Create job with image
 [//]: # (source 04/Jobs and CronJobs)
 
 <pre>
@@ -8,11 +8,11 @@ $ kuberneted create job throw-dice-job --image=throw-dice
 </pre>
 
 
-## create a Job which prints "Hello World"
+## Create a Job which prints "Hello World"
 
 >**Warning**
 >
->When command includes a sleep, job creation is waiting and of sleep
+>When command includes a sleep, job creation is waiting end of sleep
 >
 >Prefer /bin/sh -c
 
