@@ -17,11 +17,26 @@ metadata:
 $ <b>kubectl create serviceaccount dashboard-sa</b>
 </pre>
 
-[//]: # (source 02/Service Account)
+### Get a time-limited API token for that ServiceAccount :
 <pre>
 $ <b>kubectl create token dashboard-sa</b>
 eyJhbGciOiJSUzI1NiIsImtpZCI6ImxlenRpQ3JGNVQ0Qjg2YnlNS1FVUGpsS0t3cDdXd3NiUHhlTzkzaHNPSncifQ....
 </pre>
+
+
+### Manually create a long-lived API token for a ServiceAccount 
+<pre>
+kubectl apply -f - &lt;&lt;EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: build-robot-secret
+  annotations:
+    kubernetes.io/service-account.name: build-robot
+type: kubernetes.io/service-account-token
+EOF
+</pre>
+
 
 ## Edit the deployment to change ServiceAccount from default to dashboard-sa
 [//]: # (source 02/Service Account)

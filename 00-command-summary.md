@@ -148,6 +148,10 @@ kubectl expose deployment ingress-controller --type=NodePort --port=80 --name=in
 
 ```
 $ kubectl create serviceaccount dashboard-sa
+```
+
+Get a time-limited API token for that ServiceAccount :
+```
 $ kubectl create token dashboard-sa
 ```
 
