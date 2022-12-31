@@ -46,6 +46,7 @@ $ <b>curl localhost:8001/apis/authorization.k8s.io</b>
 
 Add the --runtime-config flag in the command field
 <pre>
+$ minikube ssh
 $ <b>vi /etc/kubernetes/manifests/kube-apiserver.yaml</b>
  - command:
     - kube-apiserver
