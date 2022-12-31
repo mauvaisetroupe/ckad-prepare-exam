@@ -60,7 +60,7 @@ spec:
   <b>backoffLimit: 50
   completions: 3
   parallelism: 3
-  activeDeadlineSeconds: 20
+  activeDeadlineSeconds: 20</b>
 </pre>
 
 ## How many attempts did it take to complete the job this time?
