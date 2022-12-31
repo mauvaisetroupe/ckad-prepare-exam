@@ -6,14 +6,15 @@
 
 >**Warning**
 >
->When command includes a sleep, job creation is waiting end of sleep
->
+>When command includes a sleep, job creation is waiting end of sleep</br>
 >Prefer /bin/sh -c
 
 ```
 kubectl create job busybox --image busybox -- echo hello;sleep 30;echo world
 kubectl create job busybox --image busybox -- /bin/sh -c "echo hello;sleep 30;echo world"
 ```
+
+>**Warning** : No need to add option "--command" (does not exist)
 
 
 ## List jobs and associated Pods
