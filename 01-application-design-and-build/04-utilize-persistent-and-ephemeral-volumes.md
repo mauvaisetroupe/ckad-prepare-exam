@@ -17,7 +17,15 @@ spec:
 </pre>
 
 
-## Create a PersistentVolume, PersistemtVolumeClaim 
+## Create a PersistentVolume, PersistemtVolumeClaim, and add persistentVolumeClaim in POD
+
+>**Information**
+>
+>Search 'pvc' in kubernetes dcumentation
+>
+>Kubernetes › docs › tasks › configure-persistent-volume-storage
+
+### Persistent Volume (namespaced=false)
 
 <pre>
 apiVersion: v1
@@ -34,6 +42,7 @@ spec:
     path: /pv/log
 </pre>
 
+### PersistemtVolumeClaim
 
 <pre>
 apiVersion: v1
@@ -48,8 +57,7 @@ spec:
     - ReadWriteOnce
 </pre>                        
 
-# ChangePod to use PVC instead of HostPath
-
+### Change Pod to use PVC instead of declaring volume inside POD
 
 <pre>
 apiVersion: v1
