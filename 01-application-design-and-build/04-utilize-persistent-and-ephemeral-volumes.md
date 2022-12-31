@@ -17,7 +17,7 @@ spec:
 </pre>
 
 
-## Create a PersistentVolume, PersistemtVolumeClaim, and add persistentVolumeClaim in POD
+## Create a PersistentVolume, PersistemtVolumeClaim, use in POD
 
 >**Information**
 >
