@@ -13,13 +13,16 @@
 
 ## Create a new deployment
 
-### Create a deployment with a specific image
+### Create a deployment with a specific image and running a command
 
 [//]: # (source 01 / Deployments)
 
 ```
-$ kubectl create deployment httpd-frontend --image=httpd:2.4-alpine --replicas=3
+$ kubectl create deployment httpd-frontend --image=httpd:2.4-alpine --replicas=3 -- /bin/sh -c "sleep 3600"
 ```
+
+>**Warning** : No need to add option "--command" (does not exist)
+
 
 ### Find error in ReplicatSet selector
 [//]: # (source 04/Label and Selectors)
