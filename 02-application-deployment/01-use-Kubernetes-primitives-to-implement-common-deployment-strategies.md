@@ -4,7 +4,9 @@
 
 [Find info](#find-deployment-strategy-used-for-a-deployment)
 
-[Implement Canary or blue/green](#implement-canary-or-bluegreen)
+[Implement Blue/Green](#implement-bluegreen)
+
+[Implement Canary](#implement-canary)
 
 ---
 ## Find deployment strategy used for a deployment
@@ -51,15 +53,20 @@ app-1   ClusterIP   10.43.90.86   <none>        3306/TCP   7m43s   name=app-2   
 
 ---
 
-## Implement Canary or Blue/Green
+## Implement Blue/Green
 
-### decrease replicas of a deployment
+### Scenario
 
-<pre>
-$ kubectl scale deployment mydeployment-v2 --replicas=1
-</pre>
+1. Initial 
+    - Deployment-01 with label app=my-application, version=v1
+    - ClusterIP with selector app=my-application, version=v1
+2. Create Deployment-02 with label app=my-application, version=v2
+3. Modify ClusterIP selector app=my-application, version=v2
+4. Scale Deployment-01 to replicas=0
 
-### change label selector in service to expose another deployment
+### How To
+
+#### Change ClusterIP selector in service to expose another deployment
 
 <pre>
 $ <b>kubectl edit service frontend-service </b>
@@ -69,7 +76,41 @@ kind: Service
 spec:
 ...
   selector:
-    app: myapp
+    matchLabels:
+      app: myapp
+
+</pre>
+
+#### Decrease replicas of a deployment
+
+<pre>
+$ kubectl scale deployment mydeployment-v2 --replicas=0
+</pre>
+
+---
+## Implement Canary
+
+### Scenario
+1. Initial 
+    - Deployment-01 with label app=my-application and image=httpd, 10 replicas
+    - ClusterIP with selector app=my-application
+2. Create Deployment-02 with label app=my-application, image=nginx, 2 replicas
+4. Scale Deployment-01 to replicas=8
+
+
+>**Warning**
+>
+>Version 1 and version 2 can have the same selector.
+>
+>The pod-template-hash label is added by the Deployment controller to every ReplicaSet that a Deployment creates or adopts.
+>This label ensures that child ReplicaSets of a Deployment do not overlap. 
+
+### How To
+
+#### Decrease replicas of a deployment
+
+<pre>
+$ kubectl scale deployment mydeployment-v1 --replicas=8
 </pre>
 
 [next](./02-deployments-perform-rolling-updates.md)
