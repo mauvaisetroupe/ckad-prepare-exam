@@ -388,12 +388,14 @@ MutatingAdmissionWebhook, ValidatingAdmissionWebhook, ResourceQuota)
 
 Enable an Admission Controller not enabled by default:
 <pre>
+$ minikube ssh
 $ <b>vi /etc/kubernetes/manifests/kube-apiserver.yaml</b>
    - --enable-admission-plugins=NodeRestriction,NamespaceAutoProvision
 </pre>
 
 Disable a Admission Controller enabled by default:
 <pre>
+$ minikube ssh
 $ <b>vi /etc/kubernetes/manifests/kube-apiserver.yaml</b>
    - --disable-admission-plugins=DefaultStorageClass
 </pre>
