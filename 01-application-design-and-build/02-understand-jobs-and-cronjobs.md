@@ -1,12 +1,6 @@
 # Application Design and Build - Understand Jobs and CronJobs
 
-## Create job with image
 [//]: # (source 04/Jobs and CronJobs)
-
-<pre>
-$ kuberneted create job throw-dice-job --image=throw-dice
-</pre>
-
 
 ## Create a Job which prints "Hello World"
 
@@ -42,10 +36,17 @@ throw-dice-job-r6jxz   0/1     Error       0          68s
 throw-dice-job-rq8zw   0/1     Completed   0          115s
 ```
 
-## change completions, backoffLimit, parallelism, activeDeadlineSeconds and startingDeadlineSeconds
+## change completions, backoffLimit, parallelism, activeDeadlineSeconds
+
+```
+$ kubectl explain jobs.spec.completions
+$ kubectl explain jobs.spec.parallelism
+$ kubectl explain jobs.spec.activeDeadlineSeconds
+```
 
 <pre>
-$ <b>kubectl create job throw-dice-job --image=throw-dice --dry-run=client -o yaml</b>
+$ <b>kubectl create job throw-dice-job --image=throw-dice --dry-run=client -o yaml > job.yaml</b>
+$ vi job.yaml
 apiVersion: batch/v1
 kind: Job
 spec:
@@ -60,7 +61,6 @@ spec:
   completions: 3
   parallelism: 3
   activeDeadlineSeconds: 20
-  startingDeadlineSeconds: 10</b>
 </pre>
 
 ## How many attempts did it take to complete the job this time?
@@ -70,13 +70,30 @@ $ kubectl describe jobs.batch throw-dice-job
 Pods Statuses:    0 Active (0 Ready) / 3 Succeeded / 4 Failed
 ```
 
-## Schedule that job to run at 21:30 hours every day
+## Create Cronjob - Schedule that job to run at 21:30 hours every day
 
 ```
-$ kubectl create cronjob throw-dice-cron-job --image=throw-dice --schedule="30 21 * * * "
+$ kubectl create cronjob throw-dice-cron-job --image=throw-dice --schedule="30 21 * * *"
 ```
 
+Modify editing YAML:
+```
+$ kubectl explain cronjob.spec.startingDeadlineSeconds
+```
 
----
+```
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: throw-dice-cron-job 
+spec:
+  schedule: "30 21 * * *"
+  jobTemplate:
+    spec:
+      startingDeadlineSeconds: 50 # should be > 10s
+      template:
+      # see job yaml file
+```
+
 [next](./03-multi-container-pod-design.md)
 
