@@ -1,6 +1,11 @@
 # Application observability and maintenance - Understand API deprecations
 
 
+## Preferred, Storaged version
+
+- Preferred, is the default version (retrieved by kubectc=l explain)
+- Storage version is the version in which an object is stored in etcd
+
 ## Find information about shortnames, api groups and version
 [//]: # (source 07/Lab – API Versions/Deprecations)
 
